@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Offer {
-
+public class ItemOrder {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -29,11 +29,11 @@ public class Offer {
 	private User comprador;
 
 	@ManyToOne
-	private User Voyager;
-
-	@ManyToOne
-	public Item item;
+	private User voyager;
 	
+	@ManyToOne
+	private Item item;
+
 	public Long getId() {
 		return id;
 	}
@@ -77,10 +77,10 @@ public class Offer {
 		this.comprador = comprador;
 	}
 	public User getVoyager() {
-		return Voyager;
+		return voyager;
 	}
 	public void setVoyager(User voyager) {
-		Voyager = voyager;
+		this.voyager = voyager;
 	}
 	public Status getStatus() {
 		return status;
@@ -94,5 +94,6 @@ public class Offer {
 	public void setItem(Item item) {
 		this.item = item;
 	}
+
 	
 }

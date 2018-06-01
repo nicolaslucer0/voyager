@@ -1,0 +1,61 @@
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+a {
+    color:black;
+}
+
+header {
+	background-color: white !important;
+}
+
+.login-container{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.login{
+	background-image: url("../img/3.jpg");
+	background-size: cover; 
+}
+
+.login-modal{
+	margin:auto;
+	padding: 2em; 
+	background-color: white;
+	text-align: center;
+}
+
+.form-logo{
+	width:12em;
+}
+
+.logo{
+	width: 10em;
+}
+
+.header{
+    background-color: chocolate;
+}
+
+.portada{
+	position:absolute; 
+	height: 20em;
+	width:100%;
+	background-image: url("../img/3.jpg");
+	background-size: cover; 
+}
+
+.nav-item{
+    float: left;
+    line-height: 4em;
+}
+
+.navbar{
+    padding-top: 1em;
+    text-align: center;
+}

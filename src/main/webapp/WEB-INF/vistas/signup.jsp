@@ -33,15 +33,18 @@
     </header>
 		<div class = "container login-container">
 			<div id="loginbox" class="login-modal mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-				<form:form action="validar-login" method="POST" modelAttribute="user">
+				<form:form action="validar-signup" method="POST" modelAttribute="user">
 			    	<img src="<c:url value = "/img/logo.png"/>" class="form-logo form-signin-heading">
 					<hr class="colorgraph"><br>
 					<h4>Ingrese su email y contraseña para continuar</h4>
 					<br>
-					
-					<form:input path="email" id="email" type="email" class="form-control" placeholder="Email" />
+					<form:input path="name" id="name" type="text" class="form-control" placeholder="Nombre" />
 					<br>
-					<form:input path="password" type="password" id="password" class="form-control" placeholder="Contraseña"/>     		  
+					<form:input path="lastName" id="lastName" type="text" class="form-control" placeholder="Apellido" />
+					<br> 
+					<form:input path="email" id="email" type="email" class="form-control" placeholder="email" />
+					<br>
+					<form:input path="password" type="password" id="password" class="form-control" placeholder="contraseña"/>     		  
 					<br>
 					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
 				</form:form>

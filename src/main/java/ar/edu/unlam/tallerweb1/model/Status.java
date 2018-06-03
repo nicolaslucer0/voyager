@@ -1,8 +1,10 @@
 package ar.edu.unlam.tallerweb1.model;
 
 public enum Status {
-    PENDING,
+	NEW,
+    OFFERED,
     ACCEPTED,
-    REJECTED;
+    REJECTED,
+    CANCELLED;
 }
 

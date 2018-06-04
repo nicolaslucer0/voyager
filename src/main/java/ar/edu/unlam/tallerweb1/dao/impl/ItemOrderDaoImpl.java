@@ -7,11 +7,13 @@ import javax.inject.Inject;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Status;
 
+@Repository
 public class ItemOrderDaoImpl implements ItemOrderDao {
 	
 	@Inject

@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-sm-12 col-md-9">
                     <div class="col col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="#">Crear un pedido</a>
+                        <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
                         <a class="nav-link" href="#">Gana dinero con nosotros</a>

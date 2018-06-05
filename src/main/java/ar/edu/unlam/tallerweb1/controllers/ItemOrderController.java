@@ -43,8 +43,8 @@ public class ItemOrderController {
 		Item item = new Item();
 		ItemOrder newItemOrder = new ItemOrder();
 		newItemOrder.setItem(item);
-		itemOrder.addAttribute("itemOrder", newItemOrder);
-		return new ModelAndView("itemOrderForm", itemOrder);
+		itemOrder.put("itemOrder", newItemOrder);
+		return new ModelAndView("createItemOrder", itemOrder);
 	}
 
 	/**

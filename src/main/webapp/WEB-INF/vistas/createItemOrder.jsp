@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-12 col-md-9">
                     <div class="col col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="#">Crear un pedido</a>
+                        <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
                         <a class="nav-link" href="#">Gana dinero con nosotros</a>
@@ -40,39 +40,39 @@
     	<p class="lead">
 		 Si tu producto esta disponible en alguna web, pega el link the compra debajo
 		</p>
-    	
-    	<form:form action="" method="POST" modelAttribute="itemOrder">
+    	<c:url var="post_url"  value="/order" />
+    	<form:form action="${post_url}" method="POST" modelAttribute="itemOrder">
 			<div class="row">
 				<div class="col col-md-8">
 			      <div class="form-group">
-				    <label for="itemUrlInput">Ingresa la URL del producto que estas buscando.</label>
-				    <form:input path="url" type="text" class="form-control" id="itemUrl" placeholder="URL del producto"/>
+				    <form:label path="item.url" for="itemUrl">Ingresa la URL del producto que estas buscando.></form:label>
+				    <form:input path="item.url" type="text" class="form-control" id="itemUrl" placeholder="URL del producto"/>
 				  </div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col col-md-8">
 			      <div class="form-group">
-				    <label for="itemNombreInput">Nombre del producto.</label>
-				    <form:input path="nombre" type="text" class="form-control" id="itemNombre" placeholder="Nombre del producto"/>
+				    <form:label path="item.nombre" for="itemNombre">Nombre del producto.</form:label>
+				    <form:input path="item.nombre" type="text" class="form-control" id="itemNombre" placeholder="Nombre del producto"/>
 				  </div>
 				</div>
 				<div class="col col-md-4">
 			      <div class="form-group">
-				    <label for="itemPrecioInput">Precio del producto en USD.</label>
-				    <form:input path="precio" type="text" class="form-control" id="itemPrecio" placeholder="Maximo u$d 1000"/>
+				    <form:label path="item.precio" for="itemPrecio">Precio del producto en USD.</form:label>
+				    <form:input path="item.precio" type="text" class="form-control" id="itemPrecio" placeholder="Maximo u$d 1000"/>
 				  </div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col col-md-12">
 			      <div class="form-group">
-				    <label for="itemDescripcionInput">Danos un descripción del producto que estas buscando.</label>
-				    <textarea class="form-control" id="itemDescripcion" placeholder="Descripción del producto"></textarea>
+				    <form:label path="description" for="itemDescripcion">Danos un descripción del producto que estas buscando.</form:label>
+				    <form:textarea path="description" class="form-control" id="itemDescripcion" placeholder="Descripción del producto"/>
 				  </div>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary">Crear pedido</button>
+			<button type="submit" class="btn btn-primary">Crear pedido</button>
 		</form:form>
     </div>
 

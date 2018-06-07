@@ -29,7 +29,14 @@ public class ItemOrderController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ModelAndView listNewItemOrders() {
 		ModelMap itemOrders = new ModelMap();
-		itemOrders.put("itemOrders", itemOrderService.getAllItemOrdersByStatus(Status.NEW));
+		String mensaje = " ";
+		if(itemOrderService.getAllItemOrdersByStatus(Status.NEW).size()==0){	
+			mensaje = "<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>";
+			itemOrders.put("mensajeError", mensaje);			
+		}else{
+			itemOrders.put("itemOrders", itemOrderService.getAllItemOrdersByStatus(Status.NEW));			
+		}
+		
 		return new ModelAndView("itemOrders", itemOrders);
 	}
 
@@ -56,7 +63,9 @@ public class ItemOrderController {
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder) {
 		ModelMap messagesMap = new ModelMap();
 		String pagina;
+		itemOrder.setStatus(Status.NEW);
 		if (itemOrderService.save(itemOrder)) {
+<<<<<<< HEAD
 			String message = "Order generada con éxito.";
 			messagesMap.put("mensaje1",message);
 			pagina = "exito";
@@ -64,6 +73,15 @@ public class ItemOrderController {
 			String errorMsg = "Error al generar orden, alguno de los datos no fue completado correctamente.";
 			messagesMap.put("mensaje1",errorMsg);
 			pagina = "error";
+=======
+			String mensaje = "Pedido generado con éxito.";
+			mensajes.put("mensaje1",mensaje);
+			pagina = "successOrder";
+		} else {
+			String mensaje = "Error al generar orden, alguno de los datos no fue completado correctamente.";
+			mensajes.put("mensaje1",mensaje);
+			pagina = "errorOrder";
+>>>>>>> 465a178341a35b4ef0130d59049f0d0d0e77bbd5
 		}
 		return new ModelAndView(pagina, messagesMap);
 	}

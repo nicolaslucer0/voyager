@@ -1,17 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-	<head>
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
+<head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>No se pudo generar su pedido</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	    <link href="css/main.css" rel="stylesheet">
-	</head>
-	<body>
-<<<<<<< HEAD
-	<jsp:include page='fragments/navbar.jsp'/>
-=======
-		<header>
+</head>
+<body>
+	<header>
         <div class="container-fluid">
             <div class="row navbar">
                 <div class="col-sm-12 col-md-3">
@@ -22,7 +23,7 @@
                         <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value="/order/all" />">Gana dinero con nosotros</a>
+                        <a class="nav-link" href="#">Gana dinero con nosotros</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
                         <a class="nav-link" href="<c:url value = "/login"/>" >Iniciar sesion</a>
@@ -33,14 +34,21 @@
                 </div>
             </div>
         </div>
-    </header>
-    <main class="portada">
-    	<div>button</div>
-    </main>
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
->>>>>>> 465a178341a35b4ef0130d59049f0d0d0e77bbd5
-	</body>
+    </header>    	
+	<!--
+	 * Contenido: Mensaje de error al querer grabar un pedido
+	-->
+	<div class="jumbotron" style="background-color: #eab7b7;">
+	  <div class="container">
+    		<h1>¡Ups!</h1>
+		  <p>${ mensaje1 }</p>
+		  <p><a class="btn btn-primary btn-lg" href="<c:url value="/" />" role="button">Volver</a></p>
+  	  </div>	  
+	</div>
+	
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
+	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+</body>
 </html>

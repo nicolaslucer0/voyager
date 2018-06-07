@@ -21,7 +21,7 @@
                         <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="#">Gana dinero con nosotros</a>
+                        <a class="nav-link" href="<c:url value="/order/all" />">Gana dinero con nosotros</a>
                     </div>
                     <div class="col-sm-12 col-md-3 nav-item">
                         <a class="nav-link" href="<c:url value = "/login"/>" >Iniciar sesion</a>

@@ -29,7 +29,14 @@ public class ItemOrderController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ModelAndView listNewItemOrders() {
 		ModelMap itemOrders = new ModelMap();
-		itemOrders.put("itemOrders", itemOrderService.getAllItemOrdersByStatus(Status.NEW));
+		String mensaje = " ";
+		if(itemOrderService.getAllItemOrdersByStatus(Status.NEW).size()==0){	
+			mensaje = "<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>";
+			itemOrders.put("mensajeError", mensaje);			
+		}else{
+			itemOrders.put("itemOrders", itemOrderService.getAllItemOrdersByStatus(Status.NEW));			
+		}
+		
 		return new ModelAndView("itemOrders", itemOrders);
 	}
 
@@ -56,6 +63,7 @@ public class ItemOrderController {
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder) {
 		ModelMap mensajes = new ModelMap();
 		String pagina;
+		itemOrder.setStatus(Status.NEW);
 		if (itemOrderService.save(itemOrder)) {
 			String mensaje = "Pedido generado con éxito.";
 			mensajes.put("mensaje1",mensaje);

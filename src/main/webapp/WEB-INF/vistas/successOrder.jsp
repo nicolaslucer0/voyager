@@ -33,14 +33,19 @@
                     </div>
                 </div>
             </div>
-        </div>	
+        </div>
+    </header>	
 	<!--
-	 * Contenido: Mensaje de exito luego de grabar un pedido
+	 * Contenido: Mensaje de exito luego de grabar un pedido 
 	-->
-	<div class="container">
-		<h1>¡ Exito !</h1>
-		<p class="bg-success" style="font-size:24px;padding:20px;margin-top:30px;"><strong>${ mensaje1 }</strong></p>
+	<div class="jumbotron" style="background-color: #bde9ab;">
+	  <div class="container">
+    		<h1>¡Exito!</h1>
+		  <p>${ mensaje1 }</p>
+		  <p><a class="btn btn-primary btn-lg" href="<c:url value="/" />" role="button">Volver</a></p>
+  	  </div>	  
 	</div>
+
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

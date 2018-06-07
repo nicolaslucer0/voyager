@@ -3,9 +3,9 @@
 
 <html>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/main.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet" >
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="/css/main.css" rel="stylesheet">
     <title>Error.</title>
 </head>
 <body style="text-align:center;">

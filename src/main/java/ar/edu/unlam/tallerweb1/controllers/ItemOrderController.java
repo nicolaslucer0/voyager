@@ -65,23 +65,13 @@ public class ItemOrderController {
 		String pagina;
 		itemOrder.setStatus(Status.NEW);
 		if (itemOrderService.save(itemOrder)) {
-<<<<<<< HEAD
-			String message = "Order generada con éxito.";
-			messagesMap.put("mensaje1",message);
-			pagina = "exito";
-		} else {
-			String errorMsg = "Error al generar orden, alguno de los datos no fue completado correctamente.";
-			messagesMap.put("mensaje1",errorMsg);
-			pagina = "error";
-=======
-			String mensaje = "Pedido generado con éxito.";
-			mensajes.put("mensaje1",mensaje);
+			String message = "Pedido generado con éxito.";
+			messagesMap .put("mensaje1",message);
 			pagina = "successOrder";
 		} else {
-			String mensaje = "Error al generar orden, alguno de los datos no fue completado correctamente.";
-			mensajes.put("mensaje1",mensaje);
+			String message = "Error al generar orden, alguno de los datos no fue completado correctamente.";
+			messagesMap .put("mensaje1",message);
 			pagina = "errorOrder";
->>>>>>> 465a178341a35b4ef0130d59049f0d0d0e77bbd5
 		}
 		return new ModelAndView(pagina, messagesMap);
 	}

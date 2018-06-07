@@ -9,42 +9,9 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	    <link href="css/main.css" rel="stylesheet">
 </head>
-<<<<<<< HEAD
-<body class="portada">
-    <div class="container">
-=======
 <body>
-	<header>
-        <div class="container-fluid">
-            <div class="row navbar">
-                <div class="col-sm-12 col-md-3">
-                <a href="<c:url value = "/"/>"><img src="./img/logo.png" class="logo" alt="Logo"></a>
-                </div>
-                <div class="col-sm-12 col-md-9">
-                    <div class="col col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value="/order/all" />">Gana dinero con nosotros</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/login"/>" >Iniciar sesion</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/signup"/>">Registrarse</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <!-- 
-    * Contenido: Formulario para que el comprador genere un pedido
-	* @return ItemOrder: Envia los datos al action order por POST, función saveItemOrders.
-    -->
+ 	<jsp:include page='fragments/navbar.jsp'/>
     <div class="container">    	
->>>>>>> 465a178341a35b4ef0130d59049f0d0d0e77bbd5
-    	
    		<h1>Cuéntanos sobre tu artículo</h1>
     	<p class="lead">
 		 Si tu producto esta disponible en alguna web, pegá el link de compra debajo
@@ -73,13 +40,13 @@
 				<div class="col col-md-4 ">
 			      <div class="form-group">
 				    <form:label path="item.cantidad" for="itemUrl">Ingresa la cantidad que buscas.</form:label>
-				    <form:input path="item.cantidad" type="text" class="form-control" id="itemcantidad" placeholder="Cantidad 1"/>
+				    <form:input path="item.cantidad" type="number" class="form-control" id="itemcantidad" placeholder="Cantidad 1"/>
 				  </div>
 				</div>
 				<div class="col col-md-4">
 			      <div class="form-group">
 				    <form:label path="item.precio" for="itemPrecio">Precio del producto en USD.</form:label>
-				    <form:input path="item.precio" type="text" class="form-control" id="itemPrecio" placeholder="Maximo u$d 1000"/>
+				    <form:input path="item.precio" type="number" class="form-control" id="itemPrecio" placeholder="Maximo u$d 1000"/>
 				  </div>
 				</div>
 			</div>

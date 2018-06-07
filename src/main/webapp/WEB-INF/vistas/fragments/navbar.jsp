@@ -2,14 +2,16 @@
 
 <c:url var="index"  value="/" />
 <c:url var="itemOrder"  value="/order" />
-<c:url var="offer"  value="/" />
+<c:url var="offer"  value="/order/all" />
 <c:url var="login"  value="/login" />
 <c:url var="signup"  value="/signup" />
+<c:url var="logo"  value="//img/logo.png"/> 
+
 <header>
 	<div class="container-fluid">
 		<div class="row navbar"> 
 			<div class="col-sm-12 col-md-3">
-				<a href="${index}"><img src="./img/logo.png" class="logo" alt="Logo"></a>
+				<a href="${index}"><img src="${logo}" class="logo" alt="Logo"></a> 
 			</div>
 			<div class="col-sm-12 col-md-9">
 				<div class="col col-sm-12 col-md-3 nav-item">

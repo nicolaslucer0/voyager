@@ -54,18 +54,18 @@ public class ItemOrderController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder) {
-		ModelMap mensajes = new ModelMap();
+		ModelMap messagesMap = new ModelMap();
 		String pagina;
 		if (itemOrderService.save(itemOrder)) {
-			String mensaje = "Order generada con éxito.";
-			mensajes.put("mensaje1",mensaje);
+			String message = "Order generada con éxito.";
+			messagesMap.put("mensaje1",message);
 			pagina = "exito";
 		} else {
-			String mensaje = "Error al generar orden, alguno de los datos no fue completado correctamente.";
-			mensajes.put("mensaje1",mensaje);
+			String errorMsg = "Error al generar orden, alguno de los datos no fue completado correctamente.";
+			messagesMap.put("mensaje1",errorMsg);
 			pagina = "error";
 		}
-		return new ModelAndView(pagina, mensajes);
+		return new ModelAndView(pagina, messagesMap);
 	}
 
 	/**

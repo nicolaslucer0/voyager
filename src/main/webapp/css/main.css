@@ -1,13 +1,21 @@
 body{
     font-family: 'Raleway', sans-serif;
+	background-image: url("../img/3.jpg");
+	background-size: cover; 
 }
 
 a {
+	font-size: 1.2em;
     color:black;
 }
 
 header {
-	background-color: white !important;
+	background-color: rgba(255, 255, 255, 1) !important;
+}
+
+.navbar{
+	margin-bottom: 0;
+    text-align: center;
 }
 
 .login-container{
@@ -18,10 +26,6 @@ header {
     justify-content: center;
     align-items: center;
 }
-.login{
-	background-image: url("../img/3.jpg");
-	background-size: cover; 
-}
 
 .login-modal{
 	margin:auto;
@@ -31,11 +35,11 @@ header {
 }
 
 .form-logo{
-	width:12em;
+	width:10em;
 }
 
 .logo{
-	width: 10em;
+	width: 9em;
 }
 
 .header{
@@ -55,7 +59,3 @@ header {
     line-height: 4em;
 }
 
-.navbar{
-    padding-top: 1em;
-    text-align: center;
-}

@@ -57,13 +57,13 @@ public class ItemOrderController {
 		ModelMap mensajes = new ModelMap();
 		String pagina;
 		if (itemOrderService.save(itemOrder)) {
-			String mensaje = "Order generada con éxito.";
+			String mensaje = "Pedido generado con éxito.";
 			mensajes.put("mensaje1",mensaje);
-			pagina = "exito";
+			pagina = "successOrder";
 		} else {
 			String mensaje = "Error al generar orden, alguno de los datos no fue completado correctamente.";
 			mensajes.put("mensaje1",mensaje);
-			pagina = "error";
+			pagina = "errorOrder";
 		}
 		return new ModelAndView(pagina, mensajes);
 	}

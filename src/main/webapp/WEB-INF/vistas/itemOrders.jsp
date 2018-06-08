@@ -1,31 +1,11 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lista de pedidos</title>
-<!-- 	    <link href="../css/bootstrap.min.css" rel="stylesheet" > -->
-<!-- 	    <link href="../css/bootstrap-theme.min.css" rel="stylesheet"> -->
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-
-<link href="../css/main.css" rel="stylesheet">
-
+<jsp:include page='fragments/imports.jsp' />
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
-	<main> <c:forEach items="offers">
-		<div></div>
-	</c:forEach> </main>
 	<c:if test="${mensajeError != ' '}">
 		<%-- 		<div class="alert alert-danger" role="alert">${mensajeError}</div> --%>
 		${mensajeError}

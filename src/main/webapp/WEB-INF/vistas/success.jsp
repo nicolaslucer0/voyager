@@ -3,10 +3,7 @@
 
 <html>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/main.css" rel="stylesheet">
-    <title>Error.</title>
+<jsp:include page='fragments/imports.jsp' />
 </head>
 <body style="text-align:center;">
     <h1>Error ${errorCode}</h1>

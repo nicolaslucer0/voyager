@@ -16,8 +16,7 @@ public class Item {
 	private String nombre;
 	private String descripcion;
 	private String imagen;
-	private String url;
-	private String titulo;
+	private String url;	
 	private BigDecimal precio;
 	private Long cantidad;
 
@@ -50,12 +49,6 @@ public class Item {
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
 	}
 	public BigDecimal getPrecio() {
 		return precio;

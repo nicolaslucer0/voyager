@@ -26,7 +26,7 @@ public class ItemOrderController {
 	 * Listado de pedidos con estado NEW
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.
 	 */
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listNewItemOrders() {
 		ModelMap itemOrders = new ModelMap();
 		String mensaje = " ";
@@ -44,7 +44,7 @@ public class ItemOrderController {
 	 * Este action, se utiliza cuando se quiere ir a la pagina de "Crear un nuevo pedido"
 	 * @return ModelAndView: La pagina JSP que muestra el formulario de nuevo y el item dentro de order.
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView newItemOrder() {
 		ModelMap itemOrder = new ModelMap();
 		Item item = new Item();
@@ -82,10 +82,17 @@ public class ItemOrderController {
 	 * @return ModelAndView: La pagina JSP del formulario (el mismo de nuevo item) pero con los campos completados.
 	 * NOTA: El boton guardar, lleva otra vez al controller de guardar.
 	 */
-	@RequestMapping(value = "/itemOrder/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editItemOrder(@PathVariable Long id) {
 		ModelMap itemOrder = new ModelMap();
 		itemOrder.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
 		return new ModelAndView("itemOrderForm", itemOrder);
+	}
+	
+	@RequestMapping (value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView viewItemOrderDetails(@PathVariable Long id) {
+		ModelMap itemOrder = new ModelMap();
+		itemOrder.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
+		return new ModelAndView("itemOrderDetail", itemOrder);
 	}
 }

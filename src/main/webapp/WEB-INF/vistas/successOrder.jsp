@@ -6,7 +6,6 @@
 <html>
 <head> 
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Pedido generado con exito</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	    <link href="css/main.css" rel="stylesheet">

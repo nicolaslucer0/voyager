@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/main.css" rel="stylesheet">
+	 	<jsp:include page='fragments/imports.jsp'/>
 	</head>
 	<body>
 	<jsp:include page='fragments/navbar.jsp'/>

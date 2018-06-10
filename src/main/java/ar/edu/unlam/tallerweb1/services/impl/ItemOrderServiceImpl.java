@@ -43,4 +43,12 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	public Boolean updateItemOrder(ItemOrder itemOrder) {
 		return itemOrderDao.update(itemOrder);
 	}
+
+	@Override
+	public ItemOrder changeStatus(Long id, Status status) {
+		ItemOrder order = findOneItemOrderById(id);
+		order.setStatus(status);
+		save(order);
+		return order;
+	}
 }

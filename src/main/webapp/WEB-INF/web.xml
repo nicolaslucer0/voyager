@@ -33,4 +33,8 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:/applicationContext.xml</param-value>
     </context-param>
+    
+    <error-page>
+    	<location>/errors</location>
+	</error-page>
 </web-app>

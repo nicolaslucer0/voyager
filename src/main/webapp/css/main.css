@@ -1,61 +1,45 @@
-body{
-    font-family: 'Raleway', sans-serif;
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: #f8f9fa;
 }
 
-a {
-    color:black;
+.flex-body{
+	min-height: 90vh;
+	display:flex;
 }
 
-header {
-	background-color: white !important;
+.background {
+	background-image: url("/voyager/img/3.jpg");
+	background-size: cover;
 }
 
-.login-container{
-	min-height: 100vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-.login{
-	background-image: url("../img/3.jpg");
-	background-size: cover; 
+.navbar-brand {
+	margin-left: 5em; 
+	margin-right: 3em;
 }
 
-.login-modal{
-	margin:auto;
-	padding: 2em; 
-	background-color: white;
-	text-align: center;
+.nav-item {
+	font-size: 1.2em;
+	color: black;
+	margin-right: 3em;
 }
 
-.form-logo{
-	width:12em;
+.card {
+	margin: auto;
 }
 
-.logo{
-	width: 10em;
+.card-width{ 
+	width: 50%;
 }
 
-.header{
-    background-color: chocolate;
+.card-offer{
+	margin-bottom: 3em;
 }
 
-.portada{
-	position:absolute; 
-	height: 20em;
-	width:100%;
-	background-image: url("../img/3.jpg");
-	background-size: cover; 
+.form-logo {
+	width: 10em;	
 }
 
-.nav-item{
-    float: left;
-    line-height: 4em;
-}
-
-.navbar{
-    padding-top: 1em;
-    text-align: center;
+.logo {
+	width: 6em;
 }

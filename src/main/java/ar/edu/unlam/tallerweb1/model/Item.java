@@ -12,18 +12,18 @@ public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private Long id;
 	private String nombre;
 	private String descripcion;
 	private String imagen;
-	private String url;
-	private String titulo;
+	private String url;	
 	private BigDecimal precio;
 	private Long cantidad;
-	public String getId() {
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -49,12 +49,6 @@ public class Item {
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
 	}
 	public BigDecimal getPrecio() {
 		return precio;

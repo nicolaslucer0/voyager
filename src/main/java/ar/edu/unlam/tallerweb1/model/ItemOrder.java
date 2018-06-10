@@ -2,9 +2,11 @@ package ar.edu.unlam.tallerweb1.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,18 +22,17 @@ public class ItemOrder {
 	private BigDecimal precioSinComision;
 	private BigDecimal precioFinal;
 	private String paisOrigen;
-	private String paisDestino;
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User comprador;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User voyager;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Item item;
 
 	public Long getId() {
@@ -63,12 +64,6 @@ public class ItemOrder {
 	}
 	public void setPaisOrigen(String paisOrigen) {
 		this.paisOrigen = paisOrigen;
-	}
-	public String getPaisDestino() {
-		return paisDestino;
-	}
-	public void setPaisDestino(String paisDestino) {
-		this.paisDestino = paisDestino;
 	}
 	public User getComprador() {
 		return comprador;

@@ -63,7 +63,7 @@ public class OfferController {
 		return new ModelAndView("offerForm",offer);
 	}
 	
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
 	public ModelAndView makeOrderOffer(@PathVariable Long id) {
 		ModelMap offer = new ModelMap();
 		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED);

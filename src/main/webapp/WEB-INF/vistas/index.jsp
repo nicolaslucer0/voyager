@@ -5,7 +5,7 @@
 	<head>
 	 	<jsp:include page='fragments/imports.jsp'/>
 	</head>
-	<body>
+	<body class="background">
 	<jsp:include page='fragments/navbar.jsp'/>
 	</body>
 </html>

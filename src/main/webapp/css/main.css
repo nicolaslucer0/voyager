@@ -1,53 +1,45 @@
-body{
-    font-family: 'Raleway', sans-serif;
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: #f8f9fa;
+}
+
+.flex-body{
+	min-height: 90vh;
+	display:flex;
+}
+
+.background {
 	background-image: url("/voyager/img/3.jpg");
-	background-size: cover; 
+	background-size: cover;
 }
 
-a {
+.navbar-brand {
+	margin-left: 5em; 
+	margin-right: 3em;
+}
+
+.nav-item {
 	font-size: 1.2em;
-    color:black;
+	color: black;
+	margin-right: 3em;
 }
 
-header {
-	background-color: rgba(255, 255, 255, 1) !important;
+.card {
+	margin: auto;
 }
 
-.navbar{
-	margin-bottom: 0;
-    text-align: center;
+.card-width{ 
+	width: 50%;
 }
 
-.login-container{
-	min-height: 100vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+.card-offer{
+	margin-bottom: 3em;
 }
 
-.login-modal{
-	margin:auto;
-	padding: 2em; 
-	background-color: white;
-	text-align: center;
+.form-logo {
+	width: 10em;	
 }
 
-.form-logo{
-	width:10em;
+.logo {
+	width: 6em;
 }
-
-.logo{
-	width: 9em;
-}
-
-.header{
-    background-color: chocolate;
-}
-
-.nav-item{
-    float: left;
-    line-height: 4em;
-}
-

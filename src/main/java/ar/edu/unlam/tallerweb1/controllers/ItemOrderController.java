@@ -89,6 +89,11 @@ public class ItemOrderController {
 		return new ModelAndView("itemOrderForm", itemOrder);
 	}
 	
+	/**
+	 * Ver detalles del pedido
+	 * @param id del pedido
+	 * @return
+	 */
 	@RequestMapping (value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewItemOrderDetails(@PathVariable Long id) {
 		ModelMap itemOrder = new ModelMap();

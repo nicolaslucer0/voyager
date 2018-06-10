@@ -46,4 +46,6 @@ public interface ItemOrderService {
 
 	Boolean updateItemOrder(ItemOrder itemOrder);
 
+	ItemOrder changeStatus(Long id, Status offered);
+
 }

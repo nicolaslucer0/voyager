@@ -3,6 +3,7 @@
 <html>
 <head>
 <jsp:include page='fragments/imports.jsp' />
+<script type="text/javascript" src="<c:url value="//js/showConfirm.js"/>"></script>
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
@@ -32,15 +33,15 @@
 							Precio: u$s <strong><c:out value="${order.item.precio}" /></strong>
 						</p>
 						<p>
-							<a href="<c:url value="/offer/order/${order.id}"/>"
-								class="btn btn-primary" role="button" style="width: 40%;">Ofertar</a>
-							<a href="<c:url value="/itemOrder/${order.id}"/>"
-								class="btn btn-default" role="button">Detalle</a>
+						<button type="button" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
+							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a>
 						</p> 
 					</div>
 				</div>
 			</c:forEach>
 		</div>
+		<jsp:include page="fragments/confirmOffer.jsp"></jsp:include>
 	</div>
 </body>
+
 </html>

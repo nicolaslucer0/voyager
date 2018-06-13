@@ -6,7 +6,9 @@
 <jsp:include page='fragments/imports.jsp' />
 </head>
 <body style="text-align:center;">
-    <h1>Error ${errorCode}</h1>
-    ${errorMsg}
+<jsp:include page='fragments/navbar.jsp' />
+
+    <h1>Operaci&oacute;n realiazada con &eacute;xito !</h1>
+    <a href="<c:url value="/"/>">Volver al home</a>
 </body>
 </html>

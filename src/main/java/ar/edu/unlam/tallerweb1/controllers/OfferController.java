@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.controllers;
 
 import javax.inject.Inject;
 
+import org.hibernate.Session;
+import org.hsqldb.SessionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -68,6 +70,7 @@ public class OfferController {
 		ModelMap offer = new ModelMap();
 		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED);
 		offer.addAttribute("order", order);
-		return new ModelAndView("confirmOffer",offer);
+		return new ModelAndView("success",offer);
 	}
+	
 }

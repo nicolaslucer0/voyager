@@ -4,11 +4,14 @@
 <c:url var="boostrapCSS" value="//css/bootstrap.min.css" />
 <c:url var="mainCSS" value="//css/main.css/" />
 <c:url var="bootstrapJS" value="//js/bootstrap.min.js" />
+<c:url var="jQuery" value="//js/jquery.js" />
+
+<script src="${jQuery}" type="text/javascript"></script>
+<script src="${bootstrapJS}" type="text/javascript"></script>
 
 <link href="${boostrapCSS}" rel="stylesheet">
-	<link href="${mainCSS}" rel="stylesheet">
+<link href="${mainCSS}" rel="stylesheet">
 
-<script src="${boostrapJS}" type="text/javascript"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 

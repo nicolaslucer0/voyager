@@ -43,3 +43,8 @@ body {
 .logo {
 	width: 6em;
 }
+
+.card-img-top{
+	margin:auto;
+	width: 17em;
+}

@@ -68,6 +68,6 @@ public class OfferController {
 		ModelMap offer = new ModelMap();
 		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED);
 		offer.addAttribute("order", order);
-		return new ModelAndView("confirmOffer",offer);
+		return new ModelAndView("success",offer);
 	}
 }

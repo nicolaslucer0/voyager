@@ -99,5 +99,5 @@ public class ItemOrderController {
 		ModelMap itemOrder = new ModelMap();
 		itemOrder.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
 		return new ModelAndView("itemOrderDetail", itemOrder);
-	}
+	} 
 }

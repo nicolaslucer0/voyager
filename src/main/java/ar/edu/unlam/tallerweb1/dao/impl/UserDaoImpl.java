@@ -34,4 +34,17 @@ public class UserDaoImpl implements UsuarioDao {
 				.uniqueResult();
 	}
 
+	@Override
+	public void save(User usuario) {
+		sessionFactory.getCurrentSession().save(usuario);
+	}
+
+	@Override
+	public User validEmail(String email) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (User) session.createCriteria(User.class)
+				.add(Restrictions.eq("email", email))
+				.uniqueResult();
+	}
+
 }

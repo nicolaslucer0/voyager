@@ -1,9 +1,8 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Session;
-import org.hsqldb.SessionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
+import ar.edu.unlam.tallerweb1.services.LoginService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
 
 @Controller
@@ -27,15 +28,21 @@ public class OfferController {
 	
 	@Inject
 	private ItemOrderService itemOrderService;
+	
+	@Inject
+	private LoginService loginService;
+
 	/**
 	 * Listar todas las ofertas con estado NEW
 	 * @return
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ModelAndView listOffers() {
-		ModelMap offers = new ModelMap();
-		offers.addAttribute("offers",offerService.getAllOffersByStatus(Status.NEW));
-		return new ModelAndView("offers",offers);
+	public ModelAndView listOffers(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		modelMap.addAttribute("offers",offerService.getAllOffersByStatus(Status.NEW));
+		return new ModelAndView("offers",modelMap);
 	}
 	
 	/**
@@ -43,11 +50,13 @@ public class OfferController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView newOffer() {
-		ModelMap offer = new ModelMap();
+	public ModelAndView newOffer(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
 		Offer newOffer = new Offer();
-		offer.addAttribute("offer", newOffer);
-		return new ModelAndView("offerForm",offer);
+		modelMap.addAttribute("offer", newOffer);
+		return new ModelAndView("offerForm",modelMap);
 	}
 	
 	/**
@@ -59,18 +68,22 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ModelAndView editOffer(@PathVariable Long id) {
-		ModelMap offer = new ModelMap();
-		offer.addAttribute("offers",offerService.findOneOfferById(id));
-		return new ModelAndView("offerForm",offer);
+	public ModelAndView editOffer(@PathVariable Long id, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		modelMap.addAttribute("offers",offerService.findOneOfferById(id));
+		return new ModelAndView("offerForm",modelMap);
 	}
 	
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-	public ModelAndView makeOrderOffer(@PathVariable Long id) {
-		ModelMap offer = new ModelMap();
+	public ModelAndView makeOrderOffer(@PathVariable Long id, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
 		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED);
-		offer.addAttribute("order", order);
-		return new ModelAndView("success",offer);
+		modelMap.addAttribute("order", order);
+		return new ModelAndView("success",modelMap);
 	}
 	
 }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url var="post_url" value="/order" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,6 @@
 				<h1>Cuéntanos sobre tu artículo</h1>
 				<p class="lead">Si tu producto esta disponible en alguna web,
 					pegá el link de compra debajo</p>
-				<c:url var="post_url" value="/order" />
 				<form:form action="${post_url}" method="POST"
 					modelAttribute="itemOrder">
 					<div class="row">
@@ -59,6 +59,15 @@
 								<form:label path="description" for="itemDescripcion">Danos un descripción del producto que estas buscando.</form:label>
 								<form:textarea path="description" class="form-control"
 									id="itemDescripcion" placeholder="Descripción del producto" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col col-md-8 ">
+							<div class="form-group">
+								<form:label path="item.imagen" for="itemImage">Ingresa el URL de una imagen para mostrar.</form:label>
+								<form:textarea path="item.imagen" class="form-control"
+									id="itemImage" placeholder="URL de imagen" />
 							</div>
 						</div>
 					</div>

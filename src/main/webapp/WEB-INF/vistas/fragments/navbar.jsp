@@ -5,6 +5,7 @@
 <c:url var="offer"  value="/order/" />
 <c:url var="login"  value="/login" />
 <c:url var="signup"  value="/signup" />
+<c:url var="logout"  value="/logout" />
 <c:url var="logo"  value="//img/logo.png"/> 
 
 
@@ -22,12 +23,27 @@
       <li class="nav-item">
         <a class="nav-link" href="${offer}">Gana dinero con nosotros</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${login}">Iniciar Sesion</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${signup}">Registrarse</a>
-      </li>
+      <c:if test="${userSession.id == null }">
+	      <li class="nav-item">
+	        <a class="nav-link" href="${login}">Iniciar Sesion</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="${signup}">Registrarse</a>
+	      </li>
+      </c:if>
+      
+	<c:if test="${userSession.id != null }">
+	<li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        ${userSession.name}
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Mis pedidos</a>
+        <a class="dropdown-item" href="#">Mis viajes</a>
+        <a class="dropdown-item" href="#">Mis compras</a>
+		<a class="dropdown-item" href="${logout}">Cerrar sesion</a></div>
+    </li>
+	</c:if>
     </ul>
   </div>
 </nav>

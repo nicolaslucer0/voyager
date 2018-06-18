@@ -6,4 +6,8 @@ import ar.edu.unlam.tallerweb1.model.User;
 public interface UsuarioDao {
 	
 	User consultarUsuario (User usuario);
+
+	void save(User usuario);
+
+	User validEmail(String email);
 }

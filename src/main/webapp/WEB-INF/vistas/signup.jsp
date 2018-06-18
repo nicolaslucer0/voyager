@@ -3,16 +3,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/main.css" rel="stylesheet">
+		<jsp:include page='fragments/imports.jsp' />
 	</head>
 	<body class="background">
 		<jsp:include page='fragments/navbar.jsp'/>
 		<div class="flex-body">
 		<div class="card card-width">
 		<div class="card-body login-modal">
-				<form:form action="validar-signup" method="POST" modelAttribute="user">
+				<form:form action="signup" method="POST" modelAttribute="user">
 			    	<img src="<c:url value = "/img/logo.png"/>" class="form-logo form-signin-heading">
 					<hr class="colorgraph"><br>
 					<h4>Ingrese su email y contraseña para continuar</h4>

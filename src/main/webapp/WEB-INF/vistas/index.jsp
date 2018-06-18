@@ -12,9 +12,10 @@
 	<div class="">
 		<h1 style="color:white">Voyager.</h1>
 		<h2 style="color:white">Compras alrededor del mundo.</h2>
-		<a class="btn btn-primary">Hacer un pedido</a>
-		<a class="btn btn-info">Ofertar sobre pedidos</a>
+		
+			<a class="btn btn-primary">Hacer un pedido</a>
+			<a class="btn btn-info">Ofertar sobre pedidos</a>
 	</div>
-	</div>
+	</div> 
 	</body>
 </html>

@@ -13,15 +13,19 @@ body {
 	background-size: cover;
 }
 
+.navbar {
+	min-height: 4vh;
+}
 .navbar-brand {
-	margin-left: 5em; 
-	margin-right: 3em;
+/* 	margin-left: 5em;  */
+/* 	margin-right: 3em; */
 }
 
 .nav-item {
-	font-size: 1.2em;
-	color: black;
-	margin-right: 3em;
+	line-height: 4vh;	
+/* 	font-size: 1.2em; */
+/* 	color: black; */
+/* /* 	margin-right: 3em; */ */
 }
 
 .card {
@@ -43,11 +47,8 @@ body {
 .logo {
 	width: 6em;
 }
-<<<<<<< HEAD
-=======
 
 .card-img-top{
 	margin:auto;
 	width: 17em;
 }
->>>>>>> f26061616767f159ae25b409a9e7dc21a2a52ccb

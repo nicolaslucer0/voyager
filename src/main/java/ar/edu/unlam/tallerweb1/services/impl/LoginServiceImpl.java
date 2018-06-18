@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.services.impl;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +21,29 @@ import ar.edu.unlam.tallerweb1.services.LoginService;
 public class LoginServiceImpl implements LoginService {
 
 	@Inject
-	private UsuarioDao servicioLoginDao;
+	private UsuarioDao userDao;
 
 	@Override
 	public User consultarUsuario (User usuario) {
-		return servicioLoginDao.consultarUsuario(usuario);
+		return userDao.consultarUsuario(usuario);
+	}
+	
+	@Override
+	public User validEmail(String email) {
+		return userDao.validEmail(email);
+	}
+
+	@Override
+	public void save(User usuario) {
+		userDao.save(usuario);		
+	}
+
+	@Override
+	public User getSession(HttpServletRequest request) {
+		if (request.getSession().getAttribute("USER") != null)
+			return (User) request.getSession().getAttribute("USER");
+		else
+			return null;
 	}
 
 }

@@ -15,7 +15,7 @@ public class User {
 	private String name;
 	private String lastName;
 	private String password;
-	private String rol;
+	private Rol rol;
 	
 	public Long getId() {
 		return id;
@@ -48,11 +48,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setRol(Rol user) {
+		this.rol = user;
 	}
 }

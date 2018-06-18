@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
+	<jsp:include page='fragments/imports.jsp' />
 </head>
 <body class="background">
 
@@ -13,7 +11,7 @@
 	<div class="flex-body">
 		<div class="card card-width">
 			<div class="card-body login-modal">
-				<form:form action="validar-login" method="POST"
+				<form:form action="login" method="POST"
 					modelAttribute="user">
 					<img src="<c:url value = "/img/logo.png"/>"
 						class="form-logo form-signin-heading">

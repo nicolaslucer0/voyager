@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -115,5 +117,31 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		modelMap.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
 		return new ModelAndView("itemOrderDetail", modelMap);
-	} 
+	}
+	
+	@RequestMapping (value = "/myOrders", method = RequestMethod.GET)
+	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		if (userSession != null) {
+			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId());
+			modelMap.put("itemOrders", itemOrders);
+		}
+		return new ModelAndView("itemOrdersByUser", modelMap);
+	}
+	
+	@RequestMapping (value = "/myVoyages", method = RequestMethod.GET)
+	public ModelAndView viewItemOrdersByVoyager(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		if (userSession != null) {
+			List <ItemOrder> itemOrders = itemOrderService.findAllByVoyagerIdAndStatus(userSession.getId());
+			modelMap.put("itemOrders", itemOrders);
+		}
+		return new ModelAndView("itemOrdersByUser", modelMap);
+	}
+	
+	
 }

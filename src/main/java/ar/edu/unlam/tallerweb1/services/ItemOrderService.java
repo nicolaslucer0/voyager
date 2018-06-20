@@ -48,4 +48,8 @@ public interface ItemOrderService {
 
 	ItemOrder changeStatus(Long id, Status offered);
 
+	List<ItemOrder> findAllByCompradorIdAndStatus(Long id);
+
+	List<ItemOrder> findAllByVoyagerIdAndStatus(Long id);
+
 }

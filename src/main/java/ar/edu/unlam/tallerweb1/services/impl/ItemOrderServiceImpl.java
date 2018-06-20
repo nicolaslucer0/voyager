@@ -51,4 +51,15 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		save(order);
 		return order;
 	}
+
+	@Override
+	@Transactional
+	public List<ItemOrder> findAllByCompradorIdAndStatus(Long id) {
+		return itemOrderDao.getAllItemOrderByCompradorIdAndStatus(id);
+	}
+
+	@Override
+	public List<ItemOrder> findAllByVoyagerIdAndStatus(Long id) {
+		return itemOrderDao.getAllItemOrderByVoyagerIdAndStatus(id);
+	}
 }

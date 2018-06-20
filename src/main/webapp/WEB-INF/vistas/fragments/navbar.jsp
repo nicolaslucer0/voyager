@@ -6,6 +6,7 @@
 <c:url var="login"  value="/login" />
 <c:url var="signup"  value="/signup" />
 <c:url var="logout"  value="/logout" />
+<c:url var="myItemOrders"  value="/order/myOrders" />
 <c:url var="logo"  value="//img/logo.png"/> 
 
 
@@ -38,7 +39,7 @@
         ${userSession.name}
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Mis pedidos</a>
+        <a class="dropdown-item" href="${myItemOrders}">Mis pedidos</a>
         <a class="dropdown-item" href="#">Mis viajes</a>
         <a class="dropdown-item" href="#">Mis compras</a>
 		<a class="dropdown-item" href="${logout}">Cerrar sesion</a></div>

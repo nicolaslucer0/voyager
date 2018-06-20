@@ -1,42 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <!DOCTYPE html>
 <html>
-<head> 
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/main.css" rel="stylesheet">
+<head>
+	<jsp:include page='fragments/imports.jsp' />
 </head>
 <body>
-	<header>
-        <div class="container-fluid">
-            <div class="row navbar">
-                <div class="col-sm-12 col-md-3">
-                <a href="<c:url value = "/"/>"><img src="./img/logo.png" class="logo" alt="Logo"></a>
-                </div>
-                <div class="col-sm-12 col-md-9">
-                    <div class="col col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/order"/>">Crear un pedido</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="#">Gana dinero con nosotros</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/login"/>" >Iniciar sesion</a>
-                    </div>
-                    <div class="col-sm-12 col-md-3 nav-item">
-                        <a class="nav-link" href="<c:url value = "/signup"/>">Registrarse</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>	
-	<!--
-	 * Contenido: Mensaje de exito luego de grabar un pedido 
-	-->
+<jsp:include page='fragments/navbar.jsp' />
+
 	<div class="jumbotron" style="background-color: #bde9ab;">
 	  <div class="container">
     		<h1>¡Exito!</h1>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.User;
 
 /**
  * Servicio encargado de todas las acciones relativos a las ordenes.
@@ -46,10 +47,12 @@ public interface ItemOrderService {
 
 	Boolean updateItemOrder(ItemOrder itemOrder);
 
-	ItemOrder changeStatus(Long id, Status offered);
+	ItemOrder changeStatus(Long id, Status offered, User userSession);
 
-	List<ItemOrder> findAllByCompradorIdAndStatus(Long id);
+	List<ItemOrder> findAllByCompradorIdAndStatus(Long id, Status status);
 
-	List<ItemOrder> findAllByVoyagerIdAndStatus(Long id);
+	List<ItemOrder> findAllByVoyagerIdAndStatus(Long id, Status status);
+
+	void saveNewItemOrder(ItemOrder itemOrder, User user);
 
 }

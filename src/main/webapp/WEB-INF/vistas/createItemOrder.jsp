@@ -42,8 +42,8 @@
 	
 	<div class="tab">
 		<h4>Descripci&oacute;n </h4> 
-		<form:label path="description" for="itemDescripcion">Danos un descripción del producto que estas buscando.</form:label>
-		<form:textarea path="description" class="form-control" id="itemDescripcion" placeholder="Descripción del producto" />
+		<form:label path="item.descripcion" for="itemDescripcion">Danos un descripción del producto que estas buscando.</form:label>
+		<form:textarea path="item.descripcion" class="form-control" id="itemDescripcion" placeholder="Descripción del producto" />
 		<form:label path="item.imagen" for="itemImage">Ingresa el URL de una imagen para mostrar.</form:label>
 		<form:textarea path="item.imagen" class="form-control" id="itemImage" placeholder="URL de imagen" />
 	</div>

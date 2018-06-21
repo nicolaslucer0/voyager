@@ -18,8 +18,8 @@ public interface ItemOrderDao {
 
 	Boolean update(ItemOrder itemOrder);
 
-	List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id);
+	List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id, Status status);
 
-	List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id);
+	List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id, Status status);
 
 }

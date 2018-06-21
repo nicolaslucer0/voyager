@@ -1,5 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="itemOrder"  value="/order/new" />
+<c:url var="offer"  value="/order/" />
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,8 +21,8 @@
 			</div>
 			
 			<div class="col-md-12">
-				<a class="btn btn-primary">Hacer un pedido</a>
-				<a class="btn btn-info">Ofertar sobre pedidos</a>
+				<a class="btn btn-primary" href="${itemOrder}">Hacer un pedido</a>
+				<a class="btn btn-info" href="${offer}">Ofertar sobre pedidos</a>
 			</div>
 		</div> 
 	</div>

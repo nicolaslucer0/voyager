@@ -54,18 +54,21 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id) {
+	public List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id, Status status) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id))
+				.add(Restrictions.eq("status", status))
 				.list();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id) {
+	public List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id, Status status) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+				.add(Restrictions.eq("status", status))
 				.add(Restrictions.eq("voyager.id", id))
 				.list();
 	}
+
 
 }

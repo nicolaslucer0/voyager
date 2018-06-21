@@ -57,13 +57,15 @@ public class ItemOrderController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView newItemOrder(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);;
 		Item item = new Item();
 		ItemOrder newItemOrder = new ItemOrder();
 		newItemOrder.setItem(item);
 		modelMap.put("itemOrder", newItemOrder);
-		return new ModelAndView("createItemOrder", modelMap);
+			return new ModelAndView("createItemOrder", modelMap);
 	}
 
 	/**
@@ -74,20 +76,13 @@ public class ItemOrderController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		String pagina;
-		itemOrder.setStatus(Status.NEW);
-		if (itemOrderService.save(itemOrder)) {
-			String message = "Pedido generado con éxito.";
-			modelMap .put("mensaje1",message);
-			pagina = "successOrder";
-		} else {
-			String message = "Error al generar orden, alguno de los datos no fue completado correctamente.";
-			modelMap .put("mensaje1",message);
-			pagina = "errorOrder";
-		}
-		return new ModelAndView(pagina, modelMap);
+		itemOrderService.saveNewItemOrder(itemOrder, userSession);
+		modelMap.put("message1", "Pedido generado con éxito.");
+		return new ModelAndView("successOrder", modelMap);
 	}
 
 	/**
@@ -99,6 +94,8 @@ public class ItemOrderController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editItemOrder(@PathVariable Long id, HttpServletRequest request) {
 		User userSession = (User) loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		modelMap.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
@@ -122,10 +119,12 @@ public class ItemOrderController {
 	@RequestMapping (value = "/myOrders", method = RequestMethod.GET)
 	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
-			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId());
+			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.NEW);
 			modelMap.put("itemOrders", itemOrders);
 		}
 		return new ModelAndView("itemOrdersByUser", modelMap);
@@ -134,14 +133,27 @@ public class ItemOrderController {
 	@RequestMapping (value = "/myVoyages", method = RequestMethod.GET)
 	public ModelAndView viewItemOrdersByVoyager(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
-			List <ItemOrder> itemOrders = itemOrderService.findAllByVoyagerIdAndStatus(userSession.getId());
+			List <ItemOrder> itemOrders = itemOrderService.findAllByVoyagerIdAndStatus(userSession.getId(), Status.NEW);
 			modelMap.put("itemOrders", itemOrders);
 		}
 		return new ModelAndView("itemOrdersByUser", modelMap);
 	}
 	
+	@RequestMapping(value = "/myOrders/offered", method = RequestMethod.GET)
+	public ModelAndView viewAllOfferedOrders(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		List<ItemOrder> orders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.OFFERED);
+		modelMap.addAttribute("itemOrders", orders);
+		return new ModelAndView("myOfferedOrders",modelMap);
+	}
 	
 }

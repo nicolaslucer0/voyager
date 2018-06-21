@@ -18,8 +18,7 @@ public class ItemOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String description;
-	private BigDecimal precioSinComision;
+	private BigDecimal precioComisionVoyager;
 	private BigDecimal precioFinal;
 	private String paisOrigen;
 
@@ -41,17 +40,11 @@ public class ItemOrder {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDescription() {
-		return description;
+	public BigDecimal getPrecioComisionVoyager() {
+		return precioComisionVoyager;
 	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public BigDecimal getPrecioSinComision() {
-		return precioSinComision;
-	}
-	public void setPrecioSinComision(BigDecimal precioSinComision) {
-		this.precioSinComision = precioSinComision;
+	public void setPrecioComisionVoyager(BigDecimal precioComisionVoyager) {
+		this.precioComisionVoyager = precioComisionVoyager;
 	}
 	public BigDecimal getPrecioFinal() {
 		return precioFinal;

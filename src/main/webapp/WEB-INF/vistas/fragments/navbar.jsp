@@ -7,6 +7,8 @@
 <c:url var="signup"  value="/signup" />
 <c:url var="logout"  value="/logout" />
 <c:url var="myItemOrders"  value="/order/myOrders" />
+<c:url var="myOffers"  value="/offer/myOffers" />
+<c:url var="myOfferedItemOrders"  value="/order/myOrders/offered" />
 <c:url var="logo"  value="//img/logo.png"/> 
 
 
@@ -39,9 +41,9 @@
         ${userSession.name}
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="${myItemOrders}">Mis pedidos</a>
-        <a class="dropdown-item" href="#">Mis viajes</a>
-        <a class="dropdown-item" href="#">Mis compras</a>
+        <a class="dropdown-item" href="${myItemOrders}">Mis nuevos pedidos</a>
+        <a class="dropdown-item" href="${myOffers}">Mis ofertas</a>
+        <a class="dropdown-item" href="${myOfferedItemOrders}">Mis pedidos ofertados</a>
 		<a class="dropdown-item" href="${logout}">Cerrar sesion</a></div>
     </li>
 	</c:if>

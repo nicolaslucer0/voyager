@@ -5,14 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
-import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
@@ -45,31 +43,11 @@ public class OfferController {
 		return new ModelAndView("offers",modelMap);
 	}
 	
-	/**
-	 * Direcciona al formulario para crear una nueva oferta con el modelo correspondiente
-	 * @return ModelAndView
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView newOffer(HttpServletRequest request) {
-		User userSession = loginService.getSession(request);
-		ModelMap modelMap = new ModelMap();
-		modelMap.put("userSession", userSession);
-		Offer newOffer = new Offer();
-		modelMap.addAttribute("offer", newOffer);
-		return new ModelAndView("offerForm",modelMap);
-	}
-	
-	/**
-	 * Se guarda la nueva oferta
-	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public void saveOffer(@ModelAttribute Offer offer) {
-		offerService.save(offer);
-	}
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ModelAndView editOffer(@PathVariable Long id, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		modelMap.addAttribute("offers",offerService.findOneOfferById(id));
@@ -79,11 +57,14 @@ public class OfferController {
 	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
 	public ModelAndView makeOrderOffer(@PathVariable Long id, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED);
+		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED, userSession);
 		modelMap.addAttribute("order", order);
-		return new ModelAndView("success",modelMap);
+			return new ModelAndView("success",modelMap);
 	}
+
 	
 }

@@ -25,7 +25,7 @@
 							<c:out value="${order.item.nombre}" />
 						</h5>
 						<p class="card-text">
-							<c:out value="${order.description}" />
+							<c:out value="${order.item.descripcion}" />
 						</p>
 						<p class="text-left">
 							Cant: <strong><c:out value="${order.item.cantidad}" /></strong>

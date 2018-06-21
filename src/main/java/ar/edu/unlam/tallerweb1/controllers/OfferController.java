@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -66,5 +68,18 @@ public class OfferController {
 			return new ModelAndView("success",modelMap);
 	}
 
+	@RequestMapping (value = "/myOffers", method = RequestMethod.GET)
+	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		if (userSession != null) {
+			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.NEW);
+			modelMap.put("itemOrders", itemOrders);
+		}
+		return new ModelAndView("itemOrdersByUser", modelMap);
+	}
 	
 }

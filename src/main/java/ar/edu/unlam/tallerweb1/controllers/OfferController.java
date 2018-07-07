@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
+import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
@@ -45,26 +46,15 @@ public class OfferController {
 		return new ModelAndView("offers",modelMap);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ModelAndView editOffer(@PathVariable Long id, HttpServletRequest request) {
+	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
+	public ModelAndView makeOrderOffer(@PathVariable Long orderId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		modelMap.addAttribute("offers",offerService.findOneOfferById(id));
-		return new ModelAndView("offerForm",modelMap);
-	}
-	
-	@RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-	public ModelAndView makeOrderOffer(@PathVariable Long id, HttpServletRequest request) {
-		User userSession = loginService.getSession(request);
-		if (userSession == null)
-			return new ModelAndView("redirect:/login");
-		ModelMap modelMap = new ModelMap();
-		modelMap.put("userSession", userSession);
-		ItemOrder order = itemOrderService.changeStatus(id, Status.OFFERED, userSession);
-		modelMap.addAttribute("order", order);
+		Offer offer = offerService.newOffer(orderId, userSession);
+		modelMap.addAttribute("order", offer);
 			return new ModelAndView("success",modelMap);
 	}
 
@@ -79,7 +69,7 @@ public class OfferController {
 			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.NEW);
 			modelMap.put("itemOrders", itemOrders);
 		}
-		return new ModelAndView("itemOrdersByUser", modelMap);
+		return new ModelAndView("myOffers", modelMap);
 	}
 	
 }

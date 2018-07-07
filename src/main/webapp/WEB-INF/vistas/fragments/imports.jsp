@@ -6,11 +6,16 @@
 <c:url var="bootstrapJS" value="//js/bootstrap.min.js" />
 <c:url var="jQuery" value="//js/jquery.js" />
 
+<c:url var="select2JS" value="//js/select2/select2.min.js" />
+<c:url var="select2CSS" value="//css/select2/select2.min.css" />
+
 <script src="${jQuery}" type="text/javascript"></script>
 <script src="${bootstrapJS}" type="text/javascript"></script>
+<script src="${select2JS}" type="text/javascript"></script>
 
 <link href="${boostrapCSS}" rel="stylesheet">
 <link href="${mainCSS}" rel="stylesheet">
+<link href="${select2CSS}" rel="stylesheet">
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

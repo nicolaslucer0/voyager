@@ -23,7 +23,7 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	
 	@Override
 	public List<ItemOrder> getAllItemOrders() {
-		return itemOrderDao.getAllItemOrder();
+		return itemOrderDao.findAllItemOrder();
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	}
 
 	@Override
-	public List<ItemOrder> getAllItemOrdersByStatus(Status status) {
-		return itemOrderDao.getAllItemOrderByStatus(status);
+	public List<ItemOrder> findAllItemOrdersByStatus(Status status) {
+		return itemOrderDao.findAllItemOrderByStatus(status);
 	}
 
 	@Override
@@ -60,12 +60,12 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	@Override
 	@Transactional
 	public List<ItemOrder> findAllByCompradorIdAndStatus(Long id, Status status) {
-		return itemOrderDao.getAllItemOrderByCompradorIdAndStatus(id, status);
+		return itemOrderDao.findAllItemOrderByCompradorIdAndStatus(id, status);
 	}
 
 	@Override
 	public List<ItemOrder> findAllByVoyagerIdAndStatus(Long id, Status status) {
-		return itemOrderDao.getAllItemOrderByVoyagerIdAndStatus(id, status);
+		return itemOrderDao.findAllItemOrderByVoyagerIdAndStatus(id, status);
 	}
 
 	@Override
@@ -80,6 +80,11 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	private void calcularPrecios(ItemOrder itemOrder) {
 		itemOrder.setPrecioComisionVoyager(itemOrder.getItem().getPrecio().add(itemOrder.getItem().getPrecio().multiply(new BigDecimal("0.10"))));
 		itemOrder.setPrecioFinal(itemOrder.getItem().getPrecio().add((itemOrder.getItem().getPrecio().multiply(new BigDecimal("0.10"))).multiply(new BigDecimal("2"))));
+	}
+
+	@Override
+	public List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status) {
+		return itemOrderDao.findAllItemOrdersByStatusExceptCurrentUser(id, status);
 	}
 
 }

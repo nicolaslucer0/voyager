@@ -44,4 +44,13 @@ public class OfferDaoImpl implements OfferDao {
 				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Offer> findAllByCompradorIdAndStatus(Long id) {
+		return  sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("itemOrder", "itemOrderFound")
+				.createAlias("itemOrderFound.comprador", "compradorBuscado")
+				.add(Restrictions.eq("compradorBuscado.id", id)).list();
+	}
+
 }

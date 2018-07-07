@@ -10,16 +10,18 @@ public interface ItemOrderDao {
 
 	Serializable save(ItemOrder itemOrder);
 
-	List<ItemOrder> getAllItemOrder();
+	List<ItemOrder> findAllItemOrder();
 
 	ItemOrder findOneItemOrderById(Long id);
 
-	List<ItemOrder> getAllItemOrderByStatus(Status status);
+	List<ItemOrder> findAllItemOrderByStatus(Status status);
 
 	Boolean update(ItemOrder itemOrder);
 
-	List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id, Status status);
+	List<ItemOrder> findAllItemOrderByCompradorIdAndStatus(Long id, Status status);
 
-	List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id, Status status);
+	List<ItemOrder> findAllItemOrderByVoyagerIdAndStatus(Long id, Status status);
+
+	List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status);
 
 }

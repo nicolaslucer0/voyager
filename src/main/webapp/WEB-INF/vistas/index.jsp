@@ -23,6 +23,7 @@
 			<div class="col-md-12">
 				<a class="btn btn-primary" href="${itemOrder}">Hacer un pedido</a>
 				<a class="btn btn-info" href="${offer}">Ofertar sobre pedidos</a>
+				
 			</div>
 		</div> 
 	</div>

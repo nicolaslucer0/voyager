@@ -28,18 +28,6 @@ body {
 /* /* 	margin-right: 3em; */ */
 }
 
-.card {
-	margin: auto;
-}
-
-.card-width{ 
-	width: 50%;
-}
-
-.card-offer{
-	margin-bottom: 3em;
-}
-
 .form-logo {
 	width: 10em;	
 }
@@ -48,6 +36,11 @@ body {
 	width: 6em;
 }
 
+.card {
+	margin: 2em;
+	min-width: 25%;
+    max-width: 25%;
+}
 .card-img-top{
 	margin:auto;
 	width: 17em;
@@ -110,4 +103,8 @@ input.invalid {
 
 .block{
 	display:block;
+} 
+
+.container-flex{
+	display: flex;
 }

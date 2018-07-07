@@ -29,8 +29,8 @@
 							Precio: u$s <strong><c:out value="${order.item.precio}" /></strong>
 						</p>
 						<p>
-						<button type="button" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
-							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a>
+						<button type="button" data-url="/voyager/offer/cancel/" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Cancelar oferta</button>
+							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a> 
 						</p> 
 					</div>
 				</div>

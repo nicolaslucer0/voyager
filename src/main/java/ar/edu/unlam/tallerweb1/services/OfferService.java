@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.dto.OfferDTO;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.User;
 
 public interface OfferService {
 
@@ -15,5 +16,9 @@ public interface OfferService {
 	void save(Offer offer);
 
 	Object findOneOfferById(Long id);
+
+	Offer newOffer(Long orderId, User userSession);
+
+	List<Offer> findAllByCompradorIdAndStatus(Long id);
 
 }

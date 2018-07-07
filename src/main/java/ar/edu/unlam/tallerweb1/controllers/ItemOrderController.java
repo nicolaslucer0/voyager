@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
+import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
+import ar.edu.unlam.tallerweb1.services.OfferService;
 
 @Controller
 @RequestMapping("/order")
@@ -27,11 +29,15 @@ public class ItemOrderController {
 	@Inject
 	private ItemOrderService itemOrderService;
 	
+
 	@Inject
 	private LoginService loginService;
 
+	@Inject
+	private OfferService offerService;
+
 	/**
-	 * Listado de pedidos con estado NEW
+	 * Listado de pedidos con estado NEW y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -40,11 +46,11 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		String mensaje = " ";
 		modelMap.put("userSession", userSession);
-		if(itemOrderService.getAllItemOrdersByStatus(Status.NEW).size()==0){	
+		if(itemOrderService.findAllItemOrdersByStatus(Status.NEW).size()==0){	
 			mensaje = "<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>";
 			modelMap.put("mensajeError", mensaje);			
 		}else{
-			modelMap.put("itemOrders", itemOrderService.getAllItemOrdersByStatus(Status.NEW));			
+			modelMap.put("itemOrders", itemOrderService.findAllItemOrdersByStatusExceptCurrentUser(userSession != null ? userSession.getId() : null, Status.NEW));	
 		}
 		
 		return new ModelAndView("itemOrders", modelMap);
@@ -151,8 +157,8 @@ public class ItemOrderController {
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		List<ItemOrder> orders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.OFFERED);
-		modelMap.addAttribute("itemOrders", orders);
+		List<Offer> offers = offerService.findAllByCompradorIdAndStatus(userSession.getId());
+		modelMap.addAttribute("itemOrders", offers);
 		return new ModelAndView("myOfferedOrders",modelMap);
 	}
 	

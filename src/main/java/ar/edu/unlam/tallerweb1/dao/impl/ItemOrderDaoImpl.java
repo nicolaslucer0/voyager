@@ -27,7 +27,7 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrder() {
+	public List<ItemOrder> findAllItemOrder() {
 			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class).list();
 	}
 
@@ -40,7 +40,7 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrderByStatus(Status status) {
+	public List<ItemOrder> findAllItemOrderByStatus(Status status) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("status", status))
 				.list();
@@ -54,7 +54,7 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrderByCompradorIdAndStatus(Long id, Status status) {
+	public List<ItemOrder> findAllItemOrderByCompradorIdAndStatus(Long id, Status status) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id))
 				.add(Restrictions.eq("status", status))
@@ -63,11 +63,27 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ItemOrder> getAllItemOrderByVoyagerIdAndStatus(Long id, Status status) {
+	public List<ItemOrder> findAllItemOrderByVoyagerIdAndStatus(Long id, Status status) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("status", status))
 				.add(Restrictions.eq("voyager.id", id))
 				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status) {
+		if (id != null) {
+			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+					.add(Restrictions.eq("status", status))
+					.add(Restrictions.ne("comprador.id", id))
+					.list();
+		} else {
+			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+					.add(Restrictions.eq("status", status))
+					.list();
+		}
+		
 	}
 
 

@@ -43,16 +43,16 @@ public interface ItemOrderService {
 	 * 
 	 * @return ArrayList de ItemOrder
 	 */
-	List<ItemOrder> getAllItemOrdersByStatus(Status status);
-
+	List<ItemOrder> findAllItemOrdersByStatus(Status status);
+	List<ItemOrder> findAllByCompradorIdAndStatus(Long id, Status status);
+	List<ItemOrder> findAllByVoyagerIdAndStatus(Long id, Status status);
 	Boolean updateItemOrder(ItemOrder itemOrder);
+	List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status);
 
 	ItemOrder changeStatus(Long id, Status offered, User userSession);
 
-	List<ItemOrder> findAllByCompradorIdAndStatus(Long id, Status status);
-
-	List<ItemOrder> findAllByVoyagerIdAndStatus(Long id, Status status);
-
 	void saveNewItemOrder(ItemOrder itemOrder, User user);
+
+
 
 }

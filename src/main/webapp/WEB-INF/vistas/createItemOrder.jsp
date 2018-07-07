@@ -6,13 +6,24 @@
 <head>
 <jsp:include page='fragments/imports.jsp' />
 <script type="text/javascript" src="<c:url value="//js/form.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="//js/ejemplo.js"/>"> </script>
+
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
+	<div style="margin: auto">
+	</div>
 	<div class="flex-body">
 	<form:form id="regForm" action="${post_url}" method="POST" modelAttribute="itemOrder">
 	<h1>Nueva orden de producto:</h1> 
-	
+		<h3>Buscar en mercadolibre:</h3>
+		<select id="ejemploAjax" data-url="https://api.mercadolibre.com/sites/MLU/search?q=chromecast&paging?limit=10">
+		<option>aaaaaaaaaaaaaaaaaaaaa</option>
+		<option>aaaaaaaaaaaaaaaaaaaaa</option>
+		<option>aaaaaaaaaaaaaaaaaaaaa</option>
+		<option>aaaaaaaaaaaaaaaaaaaaa</option>
+		<option>aaaaaaaaaaaaaaaaaaaaa</option>
+		</select>
 	<!-- One "tab" for each step in the form: -->
 	<div class="tab">
 		<h4>Informaci&oacute;n b&aacute;sica</h4> 

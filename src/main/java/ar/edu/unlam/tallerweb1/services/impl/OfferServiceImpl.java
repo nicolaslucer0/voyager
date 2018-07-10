@@ -47,6 +47,7 @@ public class OfferServiceImpl implements OfferService {
 	}
 
 	@Override
+	@Transactional
 	public Offer newOffer(Long orderId, User userSession) {
 		ItemOrder itemOrder = itemOrderDao.findOneItemOrderById(orderId);
 		if (itemOrder == null) {
@@ -63,6 +64,23 @@ public class OfferServiceImpl implements OfferService {
 	@Override
 	public List<Offer> findAllByCompradorIdAndStatus(Long id) {
 		return offerDao.findAllByCompradorIdAndStatus(id);
+	}
+
+	@Override
+	public Offer cancelOffer(Long offerId, User userSession) {
+		Offer offer = offerDao.findOneOfferById(offerId);
+		offer.setStatus(Status.CANCELLED);
+		return offer;
+	}
+
+	@Override
+	public List<ItemOrder> findAllByVoyagerId(Long id, Status status) {
+		return offerDao.findAllByVoyagerId(id, status);
+	}
+
+	@Override
+	public List<ItemOrder> findAllActiveOffersByVoyagerId(Long id) {
+		return offerDao.findAllActiveOffersByVoyagerId(id);
 	}
 
 }

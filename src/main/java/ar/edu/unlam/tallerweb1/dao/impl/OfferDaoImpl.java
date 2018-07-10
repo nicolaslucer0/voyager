@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.dao.OfferDao;
 import ar.edu.unlam.tallerweb1.dto.OfferDTO;
+import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 
@@ -52,5 +53,26 @@ public class OfferDaoImpl implements OfferDao {
 				.createAlias("itemOrderFound.comprador", "compradorBuscado")
 				.add(Restrictions.eq("compradorBuscado.id", id)).list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemOrder> findAllByVoyagerId(Long id, Status status) {
+		return sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("Voyager", "voyager")
+				.add(Restrictions.eq("voyager.id", id))
+				.add(Restrictions.eq("status", status))
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemOrder> findAllActiveOffersByVoyagerId(Long id) {
+		return sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("Voyager", "voyager")
+				.add(Restrictions.eq("voyager.id", id))
+				.add(Restrictions.ne("status", Status.CANCELLED))
+				.list();
+	}
+
 
 }

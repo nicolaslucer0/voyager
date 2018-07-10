@@ -15,52 +15,56 @@ import ar.edu.unlam.tallerweb1.model.Status;
 
 @Repository
 public class ItemOrderDaoImpl implements ItemOrderDao {
-	
+
 	@Inject
-    private SessionFactory sessionFactory;
-	
+	private SessionFactory sessionFactory;
+
 	@Override
 	public Serializable save(ItemOrder itemOrder) {
 		Serializable id = sessionFactory.getCurrentSession().save(itemOrder);
 		return id;
-		}
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ItemOrder> findAllItemOrder() {
-			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class).list();
 	}
 
 	@Override
 	public ItemOrder findOneItemOrderById(Long id) {
 		return (ItemOrder) sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
-				.add(Restrictions.eq("id", id))
-				.uniqueResult();
+				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ItemOrder> findAllItemOrderByStatus(Status status) {
-		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
-				.add(Restrictions.eq("status", status))
+		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class).add(Restrictions.eq("status", status))
 				.list();
 	}
 
 	@Override
 	public Boolean update(ItemOrder itemOrder) {
-		 sessionFactory.getCurrentSession().update(itemOrder);
-		 return null;
+		sessionFactory.getCurrentSession().update(itemOrder);
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ItemOrder> findAllItemOrderByCompradorIdAndStatus(Long id, Status status) {
-		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+		if (Status.ALL.equals(status)) {
+			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+					.add(Restrictions.eq("comprador.id", id))
+					.list();
+		} else {
+			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id))
 				.add(Restrictions.eq("status", status))
 				.list();
+		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ItemOrder> findAllItemOrderByVoyagerIdAndStatus(Long id, Status status) {
@@ -74,17 +78,28 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 	@Override
 	public List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status) {
 		if (id != null) {
-			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
-					.add(Restrictions.eq("status", status))
-					.add(Restrictions.ne("comprador.id", id))
-					.list();
+			if (Status.ALL.equals(status)) {
+				return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+						.add(Restrictions.ne("comprador.id", id)).list();
+			} else {
+				return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+						.add(Restrictions.eq("status", status)).add(Restrictions.ne("comprador.id", id)).list();
+			}
 		} else {
-			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
-					.add(Restrictions.eq("status", status))
-					.list();
+			if (Status.ALL.equals(status)) {
+				return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class).list();
+			} else {
+				return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+						.add(Restrictions.eq("status", status)).list();
+			}
 		}
-		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemOrder> findAllItemOrdersByUser(Long id) {
+		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+				.add(Restrictions.eq("comprador.id", id)).list();
+	}
 
 }

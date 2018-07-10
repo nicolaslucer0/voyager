@@ -53,6 +53,8 @@ public interface ItemOrderService {
 
 	void saveNewItemOrder(ItemOrder itemOrder, User user);
 
+	List<ItemOrder> findAllItemOrdersByUser(Long id);
+
 
 
 }

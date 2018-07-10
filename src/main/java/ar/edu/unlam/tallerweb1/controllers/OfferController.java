@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.dto.OfferDTO;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
-import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
 
@@ -26,9 +26,6 @@ public class OfferController {
 	
 	@Inject
 	private OfferService offerService;
-	
-	@Inject
-	private ItemOrderService itemOrderService;
 	
 	@Inject
 	private LoginService loginService;
@@ -42,7 +39,8 @@ public class OfferController {
 		User userSession = loginService.getSession(request);
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		modelMap.addAttribute("offers",offerService.getAllOffersByStatus(Status.NEW));
+		List<OfferDTO> offers = offerService.getAllOffersByStatus(Status.NEW);
+		modelMap.addAttribute("offers", offers.size() == 0 ? offers : null);
 		return new ModelAndView("offers",modelMap);
 	}
 	
@@ -66,10 +64,24 @@ public class OfferController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
-			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.NEW);
-			modelMap.put("itemOrders", itemOrders);
+			List <ItemOrder> itemOrders = offerService.findAllActiveOffersByVoyagerId(userSession.getId());
+			modelMap.put("myOffers", itemOrders);
 		}
 		return new ModelAndView("myOffers", modelMap);
 	}
+	
+	@RequestMapping(value = "/cancel/{offerId}", method = RequestMethod.GET)
+	public ModelAndView cancelOffer(@PathVariable Long offerId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		Offer offer = offerService.cancelOffer(offerId, userSession);
+		modelMap.addAttribute("order", offer);
+			return new ModelAndView("success",modelMap);
+	}
+	
+	
 	
 }

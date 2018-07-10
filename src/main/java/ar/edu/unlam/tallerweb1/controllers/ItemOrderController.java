@@ -28,7 +28,6 @@ public class ItemOrderController {
 
 	@Inject
 	private ItemOrderService itemOrderService;
-	
 
 	@Inject
 	private LoginService loginService;
@@ -37,22 +36,33 @@ public class ItemOrderController {
 	private OfferService offerService;
 
 	/**
-	 * Listado de pedidos con estado NEW y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
+	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listNewItemOrders(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		ModelMap modelMap = new ModelMap();
-		String mensaje = " ";
 		modelMap.put("userSession", userSession);
-		if(itemOrderService.findAllItemOrdersByStatus(Status.NEW).size()==0){	
-			mensaje = "<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>";
-			modelMap.put("mensajeError", mensaje);			
-		}else{
-			modelMap.put("itemOrders", itemOrderService.findAllItemOrdersByStatusExceptCurrentUser(userSession != null ? userSession.getId() : null, Status.NEW));	
+		if (userSession == null) {
+			List<ItemOrder> itemOrders = itemOrderService.findAllItemOrdersByStatus(Status.NEW);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null );	
+		} else {
+			List<ItemOrder> itemOrders = itemOrderService.findAllItemOrdersByStatusExceptCurrentUser(userSession.getId(), Status.NEW);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null );	
 		}
-		
+		return new ModelAndView("itemOrders", modelMap);
+	}
+	
+	@RequestMapping(value= "/all", method = RequestMethod.GET)
+	public ModelAndView listAllItemOrders(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");		
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		List<ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.ALL);
+		modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null );	
 		return new ModelAndView("itemOrders", modelMap);
 	}
 
@@ -122,6 +132,11 @@ public class ItemOrderController {
 		return new ModelAndView("itemOrderDetail", modelMap);
 	}
 	
+	/**
+	 * Mis pedidos nuevos
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping (value = "/myOrders", method = RequestMethod.GET)
 	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
@@ -136,6 +151,11 @@ public class ItemOrderController {
 		return new ModelAndView("itemOrdersByUser", modelMap);
 	}
 	
+	/**
+	 * MIS VIAJES
+	 * @param request
+	 * @return lista de ordenes with #Status.NEW
+	 */
 	@RequestMapping (value = "/myVoyages", method = RequestMethod.GET)
 	public ModelAndView viewItemOrdersByVoyager(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
@@ -145,11 +165,16 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
 			List <ItemOrder> itemOrders = itemOrderService.findAllByVoyagerIdAndStatus(userSession.getId(), Status.NEW);
-			modelMap.put("itemOrders", itemOrders);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null);
 		}
 		return new ModelAndView("itemOrdersByUser", modelMap);
 	}
 	
+	/**
+	 * Nuestros pedidos que alguien ofertó.
+	 * @param request
+	 * @return Lista de pedidos ya ofertados por alguien
+	 */
 	@RequestMapping(value = "/myOrders/offered", method = RequestMethod.GET)
 	public ModelAndView viewAllOfferedOrders(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);

@@ -24,4 +24,6 @@ public interface ItemOrderDao {
 
 	List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status);
 
+	List<ItemOrder> findAllItemOrdersByUser(Long id);
+
 }

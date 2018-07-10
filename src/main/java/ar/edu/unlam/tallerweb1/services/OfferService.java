@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.services;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.dto.OfferDTO;
+import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
@@ -20,5 +21,11 @@ public interface OfferService {
 	Offer newOffer(Long orderId, User userSession);
 
 	List<Offer> findAllByCompradorIdAndStatus(Long id);
+
+	Offer cancelOffer(Long offerId, User userSession);
+
+	List<ItemOrder> findAllByVoyagerId(Long id, Status status);
+
+	List<ItemOrder> findAllActiveOffersByVoyagerId(Long id);
 
 }

@@ -87,4 +87,9 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		return itemOrderDao.findAllItemOrdersByStatusExceptCurrentUser(id, status);
 	}
 
+	@Override
+	public List<ItemOrder> findAllItemOrdersByUser(Long id) {
+		return itemOrderDao.findAllItemOrdersByUser(id);
+	}
+
 }

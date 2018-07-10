@@ -7,9 +7,8 @@
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
-	<c:if test="${mensajeError != ' '}">
-		<%-- 		<div class="alert alert-danger" role="alert">${mensajeError}</div> --%>
-		${mensajeError}
+	<c:if test="${itemOrders eq null}">
+		<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
   	</c:if>
  	<div class="container">
 	<div class="d-flex align-content-around flex-wrap">
@@ -29,7 +28,7 @@
 							Precio: u$s <strong><c:out value="${order.item.precio}" /></strong>
 						</p>
 						<p>
-						<button type="button" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
+						<button type="button" data-url="<c:url value="/offer/order/${order.id}"/>" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
 							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a>
 						</p> 
 					</div>

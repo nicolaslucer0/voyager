@@ -29,10 +29,19 @@
 		</plugins>
 	</build>
 	<repositories>
-	<repository>
-                <id>mercadolibre-snapshots</id>
-                <url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
-        </repository>
+		<repository>
+			<id>mercadolibre-snapshots</id>
+			<url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
+		</repository>
+		<repository>
+			<id>java-json-mvn-repo</id>
+			<url>https://raw.github.com/mercadolibre/java-json/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -166,10 +175,25 @@
 			<version>1</version>
 		</dependency>
 		<dependency>
-                <groupId>com.mercadolibre</groupId>
-                <artifactId>sdk</artifactId>
-                <version>0.0.2-SNAPSHOT</version>
-        </dependency>
+			<groupId>com.mercadolibre</groupId>
+			<artifactId>sdk</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mercadolibre.json</groupId>
+			<artifactId>json-core</artifactId>
+			<version>0.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mercadolibre.json_jackson</groupId>
+			<artifactId>json-jackson</artifactId>
+			<version>0.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
 	</dependencies>
 	<groupId>voyager</groupId>
 	<artifactId>voyager</artifactId>

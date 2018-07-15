@@ -17,6 +17,7 @@ import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
+import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
 
@@ -26,6 +27,9 @@ public class OfferController {
 	
 	@Inject
 	private OfferService offerService;
+	
+	@Inject
+	private ItemOrderService itemOrderService;
 	
 	@Inject
 	private LoginService loginService;
@@ -55,6 +59,18 @@ public class OfferController {
 		modelMap.addAttribute("order", offer);
 			return new ModelAndView("success",modelMap);
 	}
+	
+	@RequestMapping(value = "/order/accept/{orderId}", method = RequestMethod.GET)
+	public ModelAndView acceptOffer(@PathVariable Long orderId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
+		modelMap.addAttribute("payItemOrder", itemOrder);
+		return new ModelAndView("success",modelMap);
+	}
 
 	@RequestMapping (value = "/myOffers", method = RequestMethod.GET)
 	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
@@ -65,7 +81,7 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
 			List <ItemOrder> itemOrders = offerService.findAllActiveOffersByVoyagerId(userSession.getId());
-			modelMap.put("myOffers", itemOrders);
+			modelMap.put("myOffers", itemOrders.size() != 0 ? itemOrders : null);
 		}
 		return new ModelAndView("myOffers", modelMap);
 	}

@@ -3,9 +3,13 @@ body {
 	background-color: #f8f9fa;
 }
 
-.flex-body{
-	display:flex;
+.flex-body {
+	display: flex;
+	margin: auto;
 	min-height: 90vh;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	flex-direction: column;
 }
 
 .background {
@@ -16,95 +20,113 @@ body {
 .navbar {
 	min-height: 4vh;
 }
+
 .navbar-brand {
-/* 	margin-left: 5em;  */
-/* 	margin-right: 3em; */
+	/* 	margin-left: 5em;  */
+	/* 	margin-right: 3em; */
+	
 }
 
 .nav-item {
-	line-height: 4vh;	
-/* 	font-size: 1.2em; */
-/* 	color: black; */
-/* /* 	margin-right: 3em; */ */
+	line-height: 4vh;
+	/* 	font-size: 1.2em; */
+	/* 	color: black; */
+	/* /* 	margin-right: 3em; */
+	*/
 }
 
 .form-logo {
-	width: 10em;	
+	width: 10em;
 }
 
 .logo {
 	width: 6em;
 }
 
-.card {
+.card-item {
 	margin: 2em;
 	min-width: 25%;
-    max-width: 25%;
+	max-width: 25%;
 }
-.card-img-top{
-	margin:auto;
+
+.card-img-top {
+	margin: auto;
 	width: 17em;
 }
 
-.main-text{
+.main-text {
 	margin: auto;
 }
 
 /* FORM TABS */
 /* Style the form */
 #regForm {
-  background-color: #ffffff;
-  margin: auto;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px;
+	background-color: #ffffff;
+	margin: auto;
+	width: 95%;
+	min-width: 300px;
 }
 
 /* Style the input fields */
 input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
+	padding: 10px;
+	width: 100%;
+	font-size: 17px;
+	font-family: Raleway;
+	border: 1px solid #aaaaaa;
 }
 
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
-  background-color: #ffdddd;
+	background-color: #ffdddd;
 }
 
 /* Hide all steps by default: */
 .tab {
-  display: none;
+	display: none;
 }
 
 /* Make circles that indicate the steps of the form: */
 .step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none; 
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbbbbb;
+	border: none;
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.5;
 }
 
 /* Mark the active step: */
 .step.active {
-  opacity: 1;
+	opacity: 1;
 }
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
-  background-color: #4CAF50;
+	background-color: #4CAF50;
 }
 
-.block{
-	display:block;
-} 
+.block {
+	display: block;
+}
 
-.container-flex{
+.container-flex {
 	display: flex;
+}
+
+.createItemForm {
+	margin: 1em;
+	width: 40%;
+}
+
+.centered {
+	justify-content: center;
+	margin: auto;
+}
+
+.main-content {
+	width: 100%;
+	padding:2em;
 }

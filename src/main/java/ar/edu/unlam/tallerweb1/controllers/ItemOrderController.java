@@ -1,10 +1,17 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mercadolibre.sdk.MeliException;
 
 import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
@@ -64,24 +73,6 @@ public class ItemOrderController {
 		List<ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.ALL);
 		modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null );	
 		return new ModelAndView("itemOrders", modelMap);
-	}
-
-	/**
-	 * Este action, se utiliza cuando se quiere ir a la pagina de "Crear un nuevo pedido"
-	 * @return ModelAndView: La pagina JSP que muestra el formulario de nuevo y el item dentro de order.
-	 */
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public ModelAndView newItemOrder(HttpServletRequest request) {
-		User userSession = loginService.getSession(request);
-		if (userSession == null)
-			return new ModelAndView("redirect:/login");
-		ModelMap modelMap = new ModelMap();
-		modelMap.put("userSession", userSession);;
-		Item item = new Item();
-		ItemOrder newItemOrder = new ItemOrder();
-		newItemOrder.setItem(item);
-		modelMap.put("itemOrder", newItemOrder);
-			return new ModelAndView("createItemOrder", modelMap);
 	}
 
 	/**
@@ -185,6 +176,65 @@ public class ItemOrderController {
 		List<Offer> offers = offerService.findAllByCompradorIdAndStatus(userSession.getId());
 		modelMap.addAttribute("itemOrders", offers);
 		return new ModelAndView("myOfferedOrders",modelMap);
+	}
+	
+	/**
+	 * Este action, se utiliza cuando se quiere ir a la pagina de "Crear un nuevo pedido"
+	 * @return ModelAndView: La pagina JSP que muestra el formulario de nuevo y el item dentro de order.
+	 */
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	public ModelAndView newItemOrder(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);;
+		return new ModelAndView("createItemOrder", modelMap);
+	}
+	
+	@RequestMapping(value = "/MLA/{name}", method = RequestMethod.GET)
+	public ModelAndView getItemFromMLA(@PathVariable String name, HttpServletRequest request) throws IOException, ParseException, MeliException {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		String stringUrl = "https://api.mercadolibre.com/sites/MLU/search?q=";
+		stringUrl = stringUrl.concat(name);
+		stringUrl = stringUrl.concat("&limit=10");
+		getJson(stringUrl);
+		
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		
+		// Asociar item al form
+		Item item = new Item();
+		ItemOrder newItemOrder = new ItemOrder();
+		if (org.apache.commons.lang.StringUtils.isNotEmpty(name))
+			item.setNombre(name);
+		newItemOrder.setItem(item);
+		
+		modelMap.put("itemOrder", newItemOrder);
+		return new ModelAndView("createOrderForm",modelMap);
+	}
+
+	private JSONObject getJson(String stringUrl) throws ParseException, MeliException {
+		JSONObject jsonObject = null;
+		try {
+		      URL url = new URL(stringUrl);
+		      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		      connection.setDoOutput(true);
+		      connection.setInstanceFollowRedirects(false);
+		      connection.setRequestMethod("GET");
+		      connection.setRequestProperty("Content-Type", "application/json");
+		      connection.setRequestProperty("charset", "utf-8");
+		      connection.connect();
+		      InputStream inStream = connection.getInputStream();
+		      System.out.println(new InputStreamReader(inStream, "UTF-8").read());
+//		      JSONParser jsonParser = new JSONParser();
+//		      jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(inStream, "UTF-8"));
+		    } catch (IOException ex) {
+		      ex.printStackTrace();
+		    }
+		    return jsonObject;
 	}
 	
 }

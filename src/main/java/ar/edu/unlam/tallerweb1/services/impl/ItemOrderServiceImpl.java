@@ -92,4 +92,11 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		return itemOrderDao.findAllItemOrdersByUser(id);
 	}
 
+	@Override
+	@Transactional
+	public void deleteOrderAndOffers(Long orderId) {
+		ItemOrder itemOrder = itemOrderDao.deleteOrderAndOffers(orderId);
+		itemOrder.setStatus(Status.CANCELLED);
+	}
+
 }

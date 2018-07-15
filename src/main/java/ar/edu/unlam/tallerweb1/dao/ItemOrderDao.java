@@ -26,4 +26,6 @@ public interface ItemOrderDao {
 
 	List<ItemOrder> findAllItemOrdersByUser(Long id);
 
+	ItemOrder deleteOrderAndOffers(Long orderId);
+
 }

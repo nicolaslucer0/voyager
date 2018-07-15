@@ -9,7 +9,7 @@
 	<jsp:include page='fragments/navbar.jsp' />
 	
 	<c:if test="${itemOrders eq null}">
-		<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
+		<div class='alert alert-danger' role='alert'>Nadie ha realizado pedidos por ahora.</div>
   	</c:if>
  	<div class="container">
 	<div class="d-flex align-content-around flex-wrap">

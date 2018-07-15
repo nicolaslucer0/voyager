@@ -12,7 +12,7 @@
     <jsp:include page='fragments/navbar.jsp' />
 
     <c:if test="${itemOrders eq null}">
-        <div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
+        <div class='alert alert-danger' role='alert'>Usted no ha realizado ningun pedido.</div>
     </c:if>
     <div class="container">
         <div class="d-flex align-content-around flex-wrap">
@@ -28,7 +28,7 @@
                         <p>Pais destino: <strong>${order.paisDestino}</strong></p>
                     </div>
                     <div class="card-footer text-muted">
-					    <button type="button" data-url="<c:url value="/offer/order/${order.id}"/>" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
+					    <button type="button" data-url="<c:url value="/order/cancel/${order.id}"/>" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Cancelar</button>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 				  	</div>
                 </div>
@@ -66,14 +66,14 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmar oferta?
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cancelar pedido?
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Al aceptar, se generar&aacute; una nueva oferta sobre el pedido solicitado.</p>
+                    <p>Al cancelar, se eliminar&aacute; su pedido y todas sus ofertas asociadas.</p>
                 </div>
                 <div class="modal-footer">
                     <a type="button" class="btn btn-primary" href="">Ofertar</a>

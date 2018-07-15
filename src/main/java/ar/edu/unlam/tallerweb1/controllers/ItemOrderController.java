@@ -65,7 +65,7 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		List<ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.ALL);
 		modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null );	
-		return new ModelAndView("itemOrders", modelMap);
+		return new ModelAndView("myItemOrders", modelMap);
 	}
 
 	/**
@@ -81,7 +81,6 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		itemOrderService.saveNewItemOrder(itemOrder, userSession);
-		modelMap.put("message1", "Pedido generado con éxito.");
 		return new ModelAndView("successOrder", modelMap);
 	}
 
@@ -103,25 +102,11 @@ public class ItemOrderController {
 	}
 	
 	/**
-	 * Ver detalles del pedido
-	 * @param id del pedido
-	 * @return
-	 */
-	@RequestMapping (value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewItemOrderDetails(@PathVariable Long id, HttpServletRequest request) {
-		User userSession = loginService.getSession(request);
-		ModelMap modelMap = new ModelMap();
-		modelMap.put("userSession", userSession);
-		modelMap.addAttribute("itemOrders", itemOrderService.findOneItemOrderById(id));
-		return new ModelAndView("itemOrderDetail", modelMap);
-	}
-	
-	/**
 	 * Mis pedidos nuevos
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping (value = "/myOrders", method = RequestMethod.GET)
+	@RequestMapping (value = "/myOrders")
 	public ModelAndView viewItemOrdersByComprador(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
@@ -130,9 +115,22 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
 			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.NEW);
-			modelMap.put("itemOrders", itemOrders);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null);
 		}
-		return new ModelAndView("itemOrdersByUser", modelMap);
+		return new ModelAndView("myItemOrders", modelMap);
+	}
+
+	@RequestMapping (value = "/cancel/{orderId}")
+	public ModelAndView cancelItemOrder(@PathVariable Long orderId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		if (userSession != null) {
+			itemOrderService.deleteOrderAndOffers(orderId);
+		}
+		return new ModelAndView("myItemOrders", modelMap);
 	}
 	
 	/**
@@ -167,7 +165,7 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		List<Offer> offers = offerService.findAllByCompradorIdAndStatus(userSession.getId());
-		modelMap.addAttribute("itemOrders", offers);
+		modelMap.addAttribute("itemOrders", offers.size() != 0 ? offers : null);
 		return new ModelAndView("myOfferedOrders",modelMap);
 	}
 	

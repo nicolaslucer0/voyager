@@ -55,6 +55,8 @@ public interface ItemOrderService {
 
 	List<ItemOrder> findAllItemOrdersByUser(Long id);
 
+	void deleteOrderAndOffers(Long orderId);
+
 
 
 }

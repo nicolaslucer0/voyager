@@ -21,6 +21,7 @@ public class ItemOrder {
 	private BigDecimal precioComisionVoyager;
 	private BigDecimal precioFinal;
 	private String paisOrigen;
+	private String paisDestino;
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
@@ -82,6 +83,12 @@ public class ItemOrder {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-
+	public String getPaisDestino() {
+		return paisDestino;
+	}
+	public void setPaisDestino(String paisDestino) {
+		this.paisDestino = paisDestino;
+	}
+	
 	
 }

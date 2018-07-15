@@ -30,6 +30,10 @@
 	</build>
 	<repositories>
 		<repository>
+			<id>mercadopago</id>
+			<url>https://github.com/mercadopago/sdk-java/raw/master/releases</url>
+		</repository>
+		<repository>
 			<id>mercadolibre-snapshots</id>
 			<url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
 		</repository>
@@ -175,19 +179,9 @@
 			<version>1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.mercadolibre</groupId>
-			<artifactId>sdk</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mercadolibre.json</groupId>
-			<artifactId>json-core</artifactId>
-			<version>0.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mercadolibre.json_jackson</groupId>
-			<artifactId>json-jackson</artifactId>
-			<version>0.0.4</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>

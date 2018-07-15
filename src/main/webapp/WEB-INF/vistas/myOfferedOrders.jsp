@@ -7,59 +7,56 @@
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
-	<c:if test="${mensajeError != ' '}">
-		<%-- 		<div class="alert alert-danger" role="alert">${mensajeError}</div> --%>
-		${mensajeError}
+	
+	<c:if test="${itemOrders eq null}">
+		<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
   	</c:if>
-
-	<div class="container">
-		<div class="row">
+ 	<div class="container">
+	<div class="d-flex align-content-around flex-wrap">
 			<!-- CARDS -->
-			<c:forEach var="order" items="${itemOrders}">
-				<div class="card card-offer flex-card">
-					<img class="card-img-top" alt="${order.itemOrder.item.nombre}"
-						src="${order.itemOrder.item.imagen}"
-						data-src="">
+			<c:forEach var="offer" items="${itemOrders}">
+				<div class="card card-item d-flex align-items-stretch">
+					<img class="card-img-top" alt="${offer.itemOrder.item.nombre}" src="${offer.itemOrder.item.imagen}">
 					<div class="card-body">
 						<h5 class="card-title">
-							<c:out value="${order.itemOrder.item.nombre}" />
+							<c:out value="${offer.itemOrder.item.nombre}" />
 						</h5>
 						<p class="card-text">
-							<c:out value="${order.itemOrder.item.descripcion}" />
+							<c:out value="${offer.itemOrder.item.descripcion}" />
 						</p>
 						<p class="text-left">
-							Cant: <strong><c:out value="${order.itemOrder.item.cantidad}" /></strong>
-							Precio: u$s <strong><c:out value="${order.itemOrder.item.precio}" /></strong>
+							Cant: <strong><c:out value="${offer.itemOrder.item.cantidad}" /></strong>
+							Precio: u$s <strong><c:out value="${offer.itemOrder.item.precio}" /></strong>
 						</p>
 						<p>
-						<button type="button" data-url="/voyager/offer/accept/${order.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar oferta</button>
-							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a>
+						<button type="button" data-url="<c:url value="/offer/order/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
+							<a href="<c:url value="/itemOrder/${offer.itemOrder.id}"/>" class="btn btn-default" role="button">Detalle</a>
 						</p> 
 					</div>
 				</div>
 			</c:forEach>
-		</div>
+	 	</div>
+	</div>
 		<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Aceptar oferta?</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Confirmar oferta?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <p>Luego de aceptar, deberá ingresar un m&eacute;todo de pago.</p>
+      <p>Al aceptar, se generar&aacute; una nueva oferta sobre el pedido solicitado.</p>
       </div>
       <div class="modal-footer">
-        <a type="button" class="btn btn-primary" href="">Aceptar oferta</a>
+        <a type="button" class="btn btn-primary" href="">Ofertar</a>
         <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
-	</div>
 </body>
 
 </html>

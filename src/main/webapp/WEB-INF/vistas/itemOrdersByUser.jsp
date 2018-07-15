@@ -7,17 +7,16 @@
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
-	<c:set var="imagen" value=""></c:set>
-	<c:if test="${mensajeError != ' '}">
-		${mensajeError}
+	
+	<c:if test="${itemOrders eq null}">
+		<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
   	</c:if>
-
-	<div class="container">
-		<div class="row">
+ 	<div class="container">
+	<div class="d-flex align-content-around flex-wrap">
 			<!-- CARDS -->
 			<c:forEach var="order" items="${itemOrders}">
-				<div class="card card-offer" style="width: 21rem;">
-					<img src="${order.item.imagen}" class="card-img-top" alt="${order.item.nombre}"  data-src="">
+				<div class="card card-item d-flex align-items-stretch">
+					<img class="card-img-top" alt="${order.item.nombre}" src="${order.item.imagen}">
 					<div class="card-body">
 						<h5 class="card-title">
 							<c:out value="${order.item.nombre}" />
@@ -30,12 +29,14 @@
 							Precio: u$s <strong><c:out value="${order.item.precio}" /></strong>
 						</p>
 						<p>
+						<button type="button" data-url="<c:url value="/offer/order/${order.id}"/>" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
 							<a href="<c:url value="/itemOrder/${order.id}"/>" class="btn btn-default" role="button">Detalle</a>
 						</p> 
 					</div>
 				</div>
 			</c:forEach>
-		</div>
+	 	</div>
+	</div>
 		<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -56,7 +57,6 @@
     </div>
   </div>
 </div>
-	</div>
 </body>
 
 </html>

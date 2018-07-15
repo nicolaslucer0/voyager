@@ -55,6 +55,10 @@
 				<form:textarea path="item.descripcion" class="form-control" id="itemDescripcion" placeholder="Descripción del producto" />
 				<form:label path="item.imagen" for="itemImage">Ingresa el URL de una imagen para mostrar.</form:label>
 				<form:textarea path="item.imagen" class="form-control" id="itemImage" placeholder="URL de imagen" />
+				<form:label path="paisDestino" for="paisDestino">Seleccione a que pa&iacute;s va el producto.</form:label>
+				<form:select id="paisDestino" path="paisDestino">
+					
+				</form:select>
 			</div>
 	</div>
 	<div class="row">

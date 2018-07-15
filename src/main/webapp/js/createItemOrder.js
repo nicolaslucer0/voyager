@@ -1,20 +1,47 @@
 $(document).ready(function () {
 	$("#regForm").stepWizard();
+	$.getJSON("/voyager/JSON/countries.JSON", function(data){
+		$("#paisDestino").select2({
+			data: data
+		});
+	});
+	
 	
 	$('#findItems').on('click', function() {
-		var _this = $(this);
-		name = $('#itemName').val();
-		var url = _this.data('url') + name; 
-		if (!!name){
-			var action = $("#nameForm").attr('action');
-			action = action + name;
-			$("#nameForm").attr('action', action);
-			$("#nameForm").submit();
+		if (!!$('#itemName').val()){
+			var action = $("#findItems").data('action');
+			action = action + $('#itemName').val();
+			location.href=action
 		} else {
-			 $('#itemName').addClass('has-danger');
+			 $('#itemName').addClass('is-invalid');
 		}
 	})
 	
+		$('#itemName').on('keyup', function() {
+			if ($('#itemName').val().length > 10){
+				var name = $('#itemName').val();
+				var url = $('#findItems').data('url');
+				url = url + name + "&limit=5";
+				$.get(url, function(data, status){
+			        alert("Data: " + data.results + "\nStatus: " + status);
+			        data = prepareData(data.results)
+			        $.ajax({
+			            type: 'get', 
+			            'url': '/voyager/order',
+			            data: data.results,
+			            dataType: 'json',
+			            success: function(response){ 
+			            	debugger;
+			            },
+			            timeout: 10000,
+			            error: function(xhr, status, err){ 
+			            	debugger;
+			            }
+			        }); 
+			    });
+			}
+		});
+			
 });
 
 //TODO: VALIDAR PASOS DEL FORM
@@ -60,3 +87,11 @@ function validateFirstStep(){
 function validateSecondStep(){
 	alert();
 }
+
+function prepareData(data){
+	debugger;
+	if(!!data){
+		data[0];
+	}
+}
+

@@ -38,6 +38,19 @@ $(document).ready(function () {
 			
 });
 
+/**
+ * Convierte un item de MercadoLibre en un div renderizable con un preview del mismo.
+ * @param {*} item 
+ */
+function itemToItemCard(item) {
+	var template = $("#search-result-template").clone();
+	template.find(".title").text(item.title);
+	template.find(".thumbnail").attr("src", item.thumbnail);
+	template.find(".id").val(item.id);
+	template.show();
+	return template;
+}
+
 //TODO: VALIDAR PASOS DEL FORM
 function validateFirstStep(){
 	var error = 0;

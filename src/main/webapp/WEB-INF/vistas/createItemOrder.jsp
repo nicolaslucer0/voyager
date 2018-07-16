@@ -33,6 +33,14 @@
 			</div>
 		</div>
 		<div id="search-result-container"></div>
+		
+		<!-- Item selection card template -->
+		<div id="search-result-template" class="card item-card" style="display: none;">
+			<input type="hidden" class="id">
+			<img class="thumbnail">
+			<p class="description"></p>
+			<button type="button" class="btn btn-primary" onclick="createBasedOnThisElement()">Este es el que quiero</button>
+		</div>
 	</div>
 </body>
 </html>

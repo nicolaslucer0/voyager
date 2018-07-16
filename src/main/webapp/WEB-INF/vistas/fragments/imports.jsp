@@ -9,6 +9,8 @@
 <c:url var="select2JS" value="//js/select2/select2.min.js" />
 <c:url var="select2CSS" value="//css/select2/select2.min.css" />
 
+<c:url var="mercadoLibreServiceJS" value="//js/mercadolibre.service.js" />
+
 <script src="${jQuery}" type="text/javascript"></script>
 <script src="${bootstrapJS}" type="text/javascript"></script>
 <script src="${select2JS}" type="text/javascript"></script>
@@ -17,6 +19,7 @@
 <link href="${mainCSS}" rel="stylesheet">
 <link href="${select2CSS}" rel="stylesheet">
 
+<script src="${mercadoLibreServiceJS}" type="text/javascript"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 

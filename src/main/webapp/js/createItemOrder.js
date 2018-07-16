@@ -17,32 +17,39 @@ $(document).ready(function () {
 		}
 	})
 	
-		$('#itemName').on('keyup', function() {
-			if ($('#itemName').val().length > 10){
-				var name = $('#itemName').val();
-				var url = $('#findItems').data('url');
-				url = url + name + "&limit=5";
-				$.get(url, function(data, status){
-			        alert("Data: " + data.results + "\nStatus: " + status);
-			        data = prepareData(data.results)
-			        $.ajax({
-			            type: 'get', 
-			            'url': '/voyager/order',
-			            data: data.results,
-			            dataType: 'json',
-			            success: function(response){ 
-			            	debugger;
-			            },
-			            timeout: 10000,
-			            error: function(xhr, status, err){ 
-			            	debugger;
-			            }
-			        }); 
-			    });
-			}
-		});
+	$('#itemName').on('keyup', function() {
+		var productName = $('#itemName').val();
+		if (productName.length > 10){
+
+			mercadoLibreService
+				.findProductsByName(productName, 5)
+				.done(response => {
+					if(response.results) {
+						var itemCards = response.results.map(itemToItemCard);
+						$("#search-result-container").html(itemCards);
+					} else
+						$("#search-result-container").html(`No se encontraron productos similares a <b>${productName}</b>`);
+				})
+				.fail(err => {
+					$("#search-result-container").html(`Ocurri\u00F3 un error al realizar la b\u00FAsqueda. Por favor, intente nuevamente.`);
+				});
+		}
+	});
 			
 });
+
+/**
+ * Convierte un item de MercadoLibre en un div renderizable con un preview del mismo.
+ * @param {*} item 
+ */
+function itemToItemCard(item) {
+	var template = $("#search-result-template").clone();
+	template.find(".title").text(item.title);
+	template.find(".thumbnail").attr("src", item.thumbnail);
+	template.find(".id").val(item.id);
+	template.show();
+	return template;
+}
 
 //TODO: VALIDAR PASOS DEL FORM
 function validateFirstStep(){

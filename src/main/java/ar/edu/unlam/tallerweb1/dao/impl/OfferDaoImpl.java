@@ -51,7 +51,10 @@ public class OfferDaoImpl implements OfferDao {
 		return  sessionFactory.getCurrentSession().createCriteria(Offer.class)
 				.createAlias("itemOrder", "itemOrderFound")
 				.createAlias("itemOrderFound.comprador", "compradorBuscado")
-				.add(Restrictions.eq("compradorBuscado.id", id)).list();
+				.add(Restrictions.eq("compradorBuscado.id", id))
+				.add(Restrictions.ne("status", Status.REJECTED))
+				.add(Restrictions.ne("status", Status.CANCELLED))
+				.list();
 	}
 
 	@SuppressWarnings("unchecked")

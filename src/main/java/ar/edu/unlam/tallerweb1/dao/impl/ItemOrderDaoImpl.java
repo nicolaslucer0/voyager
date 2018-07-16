@@ -10,7 +10,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
+import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
+import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 
 @Repository
@@ -56,10 +58,14 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 		if (Status.ALL.equals(status)) {
 			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 					.add(Restrictions.eq("comprador.id", id))
+					.add(Restrictions.ne("status", Status.CANCELLED))
+					.add(Restrictions.ne("status", Status.REJECTED))
 					.list();
 		} else {
 			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id))
+				.add(Restrictions.ne("status", Status.CANCELLED))
+				.add(Restrictions.ne("status", Status.REJECTED))
 				.add(Restrictions.eq("status", status))
 				.list();
 		}
@@ -100,6 +106,25 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 	public List<ItemOrder> findAllItemOrdersByUser(Long id) {
 		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id)).list();
+	}
+
+	@Override
+	public ItemOrder deleteOrderAndOffers(Long orderId) {
+		ItemOrder itemOrder = (ItemOrder) sessionFactory.getCurrentSession()
+				.createCriteria(ItemOrder.class)
+				.add(Restrictions.eq("id", orderId)).uniqueResult();
+		
+		@SuppressWarnings("unchecked")
+		List<Offer> offers = sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("itemOrder", "itemOrderFound")
+				.add(Restrictions.eq("itemOrderFound.id", orderId)).list();
+		
+		for (Offer offer : offers) {
+			sessionFactory.getCurrentSession().delete(offer);
+		}
+//		sessionFactory.getCurrentSession().delete(item);
+		
+		return itemOrder;
 	}
 
 }

@@ -9,7 +9,7 @@
 	<jsp:include page='fragments/navbar.jsp' />
 	
 	<c:if test="${itemOrders eq null}">
-		<div class='alert alert-danger' role='alert'>No hay solicitudes de compradores de momento, vuelva mas tarde.</div>
+		<div class='alert alert-danger' role='alert'>Nadie ha realizado pedidos por ahora.</div>
   	</c:if>
  	<div class="container">
 	<div class="d-flex align-content-around flex-wrap">
@@ -29,7 +29,7 @@
 							Precio: u$s <strong><c:out value="${offer.itemOrder.item.precio}" /></strong>
 						</p>
 						<p>
-						<button type="button" data-url="<c:url value="/offer/order/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ofertar</button>
+						<button type="button" data-url="<c:url value="/order/accept/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar Oferta</button>
 							<a href="<c:url value="/itemOrder/${offer.itemOrder.id}"/>" class="btn btn-default" role="button">Detalle</a>
 						</p> 
 					</div>
@@ -48,10 +48,10 @@
         </button>
       </div>
       <div class="modal-body">
-      <p>Al aceptar, se generar&aacute; una nueva oferta sobre el pedido solicitado.</p>
+      <p>Luego de aceptar, se generar&aacute; una orden de pago via MercadoPago.</p>
       </div>
       <div class="modal-footer">
-        <a type="button" class="btn btn-primary" href="">Ofertar</a>
+        <a type="button" class="btn btn-primary" href="">Aceptar oferta</a>
         <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
       </div>
     </div>

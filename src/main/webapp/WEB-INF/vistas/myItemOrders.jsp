@@ -76,7 +76,7 @@
                     <p>Al cancelar, se eliminar&aacute; su pedido y todas sus ofertas asociadas.</p>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-primary" href="">Ofertar</a>
+                    <a type="button" class="btn btn-primary" href="">Cancelar</a>
                     <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

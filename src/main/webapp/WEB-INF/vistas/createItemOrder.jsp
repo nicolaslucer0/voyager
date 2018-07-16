@@ -19,7 +19,7 @@
 			<div id="search">
 <%-- 			<form id="nameForm" action="<c:url value="/order/MLA/"></c:url>" method="GET"> --%>
 				<h3>Crear un pedido:</h3>
-				<p>Para crear un nuevo pedido, por favor, inserte el nombre del producto que está buscando.</p>
+				<p>Para crear un nuevo pedido, por favor, inserte el nombre del producto que estï¿½ buscando.</p>
 	 			<div class="input-group mb-3">
 				  <input type="text" class="form-control" id="itemName" placeholder="Nombre del producto...">
 	  				<div class="input-group-append">
@@ -31,7 +31,8 @@
 				</div>
 <!-- 			</form> -->
 			</div>
-	</div>
+		</div>
+		<div id="search-result-container"></div>
 	</div>
 </body>
 </html>

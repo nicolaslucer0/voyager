@@ -16,7 +16,6 @@
     /**
      * Performs a search against MercadoLibre api
      * 
-     * Search is performed with a max of 50 results by default.
      * Result is returned paginated, and with extra info provided by ML.
      * Meaningfull results are under response.results.
      * Meaningull info is under:
@@ -24,20 +23,23 @@
      * * result.permalink
      * * result.thumbnail
      * * result.title
-     * @param {string} searchValue 
+     * @param {string}  searchValue 
+     * @param {int}     limit optional limit. Defaults to 10.
      * @return {jQuery.Deferred} resolution promise
      */
-    function findProductsByName(searchValue) {
+    function findProductsByName(searchValue, limit) {
+
         var dfd = jQuery.Deferred();
 
         $.ajax({
             url: ML_SEARCH_ENDPOINT,
             method: "GET",
             data: {
-                q: searchValue
+                q: searchValue,
+                limit: limit
             }
         }).done(response => dfd.resolve(response));
 
-        return dfd;
+        return dfd.promise();
     }
 })(jQuery);

@@ -58,10 +58,14 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 		if (Status.ALL.equals(status)) {
 			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 					.add(Restrictions.eq("comprador.id", id))
+					.add(Restrictions.ne("status", Status.CANCELLED))
+					.add(Restrictions.ne("status", Status.REJECTED))
 					.list();
 		} else {
 			return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("comprador.id", id))
+				.add(Restrictions.ne("status", Status.CANCELLED))
+				.add(Restrictions.ne("status", Status.REJECTED))
 				.add(Restrictions.eq("status", status))
 				.list();
 		}
@@ -110,10 +114,6 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 				.createCriteria(ItemOrder.class)
 				.add(Restrictions.eq("id", orderId)).uniqueResult();
 		
-		Item item = (Item) sessionFactory.getCurrentSession()
-				.createCriteria(Item.class)
-				.add(Restrictions.eq("id", itemOrder.getItem().getId())).uniqueResult();
-		
 		@SuppressWarnings("unchecked")
 		List<Offer> offers = sessionFactory.getCurrentSession().createCriteria(Offer.class)
 				.createAlias("itemOrder", "itemOrderFound")
@@ -122,7 +122,7 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 		for (Offer offer : offers) {
 			sessionFactory.getCurrentSession().delete(offer);
 		}
-		sessionFactory.getCurrentSession().delete(item);
+//		sessionFactory.getCurrentSession().delete(item);
 		
 		return itemOrder;
 	}

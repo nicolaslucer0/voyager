@@ -89,4 +89,8 @@ public class LoginController {
 		model.put("userSession", userSession);
 		return new ModelAndView("index",model);
 	}
+
+	public void setLoginService(LoginService servicioMock) {
+		this.loginService = servicioMock;
+	}
 }

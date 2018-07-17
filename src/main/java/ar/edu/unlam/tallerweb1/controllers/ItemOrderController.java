@@ -130,7 +130,7 @@ public class ItemOrderController {
 		if (userSession != null) {
 			itemOrderService.deleteOrderAndOffers(orderId);
 		}
-		return new ModelAndView("myItemOrders", modelMap);
+		return new ModelAndView("redirect:/myOrders");
 	}
 	
 	/**

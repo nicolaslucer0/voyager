@@ -130,3 +130,13 @@ input.invalid {
 	width: 100%;
 	padding:2em;
 }
+
+.login-modal {
+	margin: auto;
+	width: 80%;
+}
+
+.signup-modal {
+	margin: auto; 
+	width: 80%;
+}

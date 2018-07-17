@@ -9,7 +9,7 @@
 
 	<jsp:include page='fragments/navbar.jsp' />
 	<div class="flex-body">
-		<div class="card card-width">
+		<div class="card card-width login-modal">
 			<div class="card-body login-modal">
 				<form:form action="login" method="POST"
 					modelAttribute="user">

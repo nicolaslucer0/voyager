@@ -17,22 +17,41 @@
 				<div class="card d-flex align-items-stretch">
 					<img class="card-img-top" alt="${offer.itemOrder.item.imagen}" src="${offer.itemOrder.item.imagen}">
 					<div class="card-body">
-						<h5 class="card-title">
-							<c:out value="${offer.itemOrder.item.nombre}" />
-						</h5>
-						<p class="card-text">
-							<c:out value="${offer.itemOrder.item.descripcion}" />
-						</p>
-						<p class="text-left">
-							Cant: <strong><c:out value="${offer.itemOrder.item.cantidad}" /></strong>
-							Precio: u$s <strong><c:out value="${offer.itemOrder.item.precio}" /></strong>
-						</p>
-						<p>
+						<h5 class="card-title">${offer.itemOrder.item.nombre}</h5>
+                        <p class="card-text">${offer.itemOrder.item.descripcion}</p>
+                        <p>Cant:<strong>${offer.itemOrder.item.cantidad}</strong></p>
+                        <p>Precio: u$s <strong>${offer.itemOrder.item.precio}</strong></p>
+						<p>Pais destino: <strong>${offer.itemOrder.paisDestino}</strong></p>
+					</div>
+                    <div class="modal-footer">
 						<button type="button" data-url='/voyager/offer/cancel/${offer.id}'  class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Cancelar oferta</button>
-							<a href="<c:url value="/itemOrder/${offer.id}"/>" class="btn btn-default" role="button">Detalle</a> 
-						</p> 
+                        <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 					</div>
 				</div>
+				<!--  ###################### MODAL  #####################-->
+                <div class="modal fade detail" id="detailModal${order.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal${ order.id}">Detalles</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                    <img class="card-img-top" alt="${offer.itemOrder.item.nombre}" src="${offer.itemOrder.item.imagen}">
+                                    <div class="card-body">
+										<h5 class="card-title">${offer.itemOrder.item.nombre}</h5>
+                                        <p class="card-text">${offer.itemOrder.item.descripcion}</p>
+                            			<p>Cant:<strong>${offer.itemOrder.item.cantidad}</strong></p>
+                            			<p>Precio: u$s <strong>${offer.itemOrder.item.precio}</strong></p>
+										<p>Pais destino: <strong>${offer.itemOrder.paisDestino}</strong></p>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warn" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</c:forEach>
 	 	</div>
 	</div>

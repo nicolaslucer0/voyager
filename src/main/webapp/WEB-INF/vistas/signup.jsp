@@ -8,7 +8,7 @@
 	<body class="background">
 		<jsp:include page='fragments/navbar.jsp'/>
 		<div class="flex-body">
-		<div class="card card-width">
+		<div class="card signup-modal">
 		<div class="card-body login-modal">
 				<form:form action="signup" method="POST" modelAttribute="user">
 			    	<img src="<c:url value = "/img/logo.png"/>" class="form-logo form-signin-heading">

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.filter.UserSessionRetriever;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.LoginService;
 
@@ -40,10 +41,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public User getSession(HttpServletRequest request) {
-		if (request.getSession().getAttribute("USER") != null)
-			return (User) request.getSession().getAttribute("USER");
-		else
-			return null;
+		return UserSessionRetriever.getUserFromSession(request);
 	}
 
 }

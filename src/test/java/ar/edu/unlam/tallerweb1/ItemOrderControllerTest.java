@@ -31,7 +31,7 @@ import ar.edu.unlam.tallerweb1.services.impl.*;
 
 
 @SuppressWarnings("unused")
-public class ItemOrderTest{
+public class ItemOrderControllerTest{
 	
 	@Inject
 	private ItemOrderService itemOrderService;

@@ -33,6 +33,19 @@ public class OfferController {
 	
 	@Inject
 	private LoginService loginService;
+	
+
+	public void setOfferService(OfferService offerService) {
+		this.offerService = offerService;
+	}
+
+	public void setItemOrderService(ItemOrderService itemOrderService) {
+		this.itemOrderService = itemOrderService;
+	}
+
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
 	/**
 	 * Listar todas las ofertas con estado NEW

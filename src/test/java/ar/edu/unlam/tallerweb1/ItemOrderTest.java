@@ -210,7 +210,7 @@ public class ItemOrderTest{
 	}
 	/**
 	 * Action: viewItemOrdersByVoyager
-	 * Resultado Buscado: ModelAndView.getViewName() = "myOfferedOrders";
+	 * Resultado Buscado: ModelAndView.getViewName() = "itemOrdersByUser";
 	 */	
 	@Test
 	public void viewItemOrdersByVoyager(){
@@ -230,7 +230,7 @@ public class ItemOrderTest{
 	}
 	/**
 	 * Action: newItemOrder
-	 * Resultado Buscado: ModelAndView.getViewName() = "myOfferedOrders";
+	 * Resultado Buscado: ModelAndView.getViewName() = "createItemOrder";
 	 */	
 	@Test
 	public void newItemOrder(){
@@ -250,7 +250,7 @@ public class ItemOrderTest{
 	}
 	/**
 	 * Action: getItemFromMLA
-	 * Resultado Buscado: ModelAndView.getViewName() = "myOfferedOrders";
+	 * Resultado Buscado: ModelAndView.getViewName() = "createOrderForm";
 	 */	
 	@Test
 	public void getItemFromMLA(){
@@ -271,8 +271,8 @@ public class ItemOrderTest{
 	}
 	/**
 	 * Action: mercadolibreToVoyager
-	 * Resultado Buscado: ModelAndView.getViewName() = "myOfferedOrders";
-	 * @throws MalformedURLException 
+	 * Resultado Buscado: ModelAndView.getViewName() = "createOrderForm";
+	 * 
 	 */	
 	@Test
 	public void mercadolibreToVoyager() throws MalformedURLException{

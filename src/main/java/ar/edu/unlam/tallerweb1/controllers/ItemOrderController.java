@@ -41,6 +41,22 @@ public class ItemOrderController {
 	@Inject
 	private MercadoLibreService mercadolibreService;
 
+	public void setItemOrderService(ItemOrderService itemOrderServiceMock) {
+		this.itemOrderService = itemOrderServiceMock;
+	}
+
+	public void setLoginService(LoginService loginServiceMock) {
+		this.loginService = loginServiceMock;
+	}
+
+	public void setOfferService(OfferService offerServiceMock) {
+		this.offerService = offerServiceMock;
+	}
+
+	public void setMercadolibreService(MercadoLibreService mercadolibreServiceMock) {
+		this.mercadolibreService = mercadolibreServiceMock;
+	}
+
 	/**
 	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	$("#regForm").stepWizard();
+	
 	$.getJSON("/voyager/JSON/countries.JSON", function(data){
 		$("#paisDestino").select2({
 			data: data
@@ -47,11 +48,21 @@ function itemToItemCard(item) {
 	template.find(".title").text(item.title);
 	template.find(".thumbnail").attr("src", item.thumbnail);
 	template.find(".id").val(item.id);
+	template.find(".id").data("id",item.id);
+	template.find(".id").attr("data-id", item.id);
 	template.show();
 	return template;
 }
 
-//TODO: VALIDAR PASOS DEL FORM
+function createBasedOnThisElement(){
+	var template = $("#search-result-template").clone();
+	var url = "/voyager/order/MLA/search/";
+	var id = template.find(".id").data("id");
+	url = url + id;
+	location.href= url;
+
+}
+
 function validateFirstStep(){
 	var error = 0;
 	if (!$('#itemNombre').val()){

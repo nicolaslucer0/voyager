@@ -18,7 +18,7 @@
         <div class="d-flex align-content-around flex-wrap">
             <!-- CARDS -->
             <c:forEach var="order" items="${itemOrders}">
-                <div class="card card-item d-flex align-items-stretch">
+                <div class="card card-item d-flex align-items-stretch"> 
                     <img class="card-img-top" alt="${order.item.nombre}" src="${order.item.imagen}">
                     <div class="card-body">
                         <h5 class="card-title">${order.item.nombre}</h5>

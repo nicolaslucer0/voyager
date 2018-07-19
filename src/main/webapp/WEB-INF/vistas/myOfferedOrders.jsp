@@ -71,6 +71,8 @@
       <div class="modal-body">
       <p>Luego de aceptar, se generar&aacute; una orden de pago via MercadoPago.</p>
       <p>Se esta generado el link de pago. Una vez terminado se habilitara el boton</p>
+      <p><strong>Medios de pago</strong></p>
+      <img style="width: 100%" src="<c:url value="//img/mercadopago.png"/>"> 
       </div>
       <div class="modal-footer">
                 	 <input id="btnMercadoPago" type="button" 

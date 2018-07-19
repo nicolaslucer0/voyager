@@ -4,6 +4,8 @@
 <html>
 <head>
 	<jsp:include page='fragments/imports.jsp' />
+	<script type="text/javascript" src="<c:url value="//js/validateRegister.js"/>"></script>
+	
 </head>
 <body class="background">
 
@@ -11,8 +13,7 @@
 	<div class="flex-body">
 		<div class="card card-width login-modal">
 			<div class="card-body login-modal">
-				<form:form action="login" method="POST"
-					modelAttribute="user">
+				<form:form id="regForm" action="login" method="POST" modelAttribute="user">
 					<img src="<c:url value = "/img/logo.png"/>"
 						class="form-logo form-signin-heading">
 					<hr class="colorgraph">
@@ -26,15 +27,10 @@
 					<form:input path="password" type="password" id="password"
 						class="form-control" placeholder="Contraseña" />
 					<br>
-					<button class="btn btn-lg btn-primary btn-block" Type="Submit">Login</button>
+					<input type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm('L')" value="Iniciar sesion" />
 				</form:form>
 
-				<c:if test="${not empty error}">
-					<h4>
-						<span>${error}</span>
-					</h4>
-					<br>
-				</c:if>
+				<span id="errorForm" data-error="${error}"></span>
 			</div>
 		</div>
 	</div>

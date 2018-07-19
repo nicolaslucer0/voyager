@@ -10,11 +10,16 @@ $(document).ready(function() {
 			data : data,
 			url : "getMPLink",
 			success : function(urlMP) {
-				$('#btnMercadoPago').attr('href', urlMP);
+				$('#btnMercadoPago').data('MP-url', urlMP);
 				$('#btnMercadoPago').prop('disabled', false);
 				$('#btnMercadoPago').removeClass('disabled');
 			}
 		});
 		
 	});
+	
+	$('#btnMercadoPago').on('click', function(){
+		location.href = $(this).data('MP-url');
+	});
+	
 });

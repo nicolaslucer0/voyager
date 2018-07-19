@@ -184,7 +184,7 @@ public class ItemOrderController {
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		List<Offer> offers = offerService.findAllByCompradorIdAndStatus(userSession.getId());
+		List<Offer> offers = offerService.findAllMyOfferedOrders(userSession.getId());
 		modelMap.addAttribute("itemOrders", offers.size() != 0 ? offers : null);
 		return new ModelAndView("myOfferedOrders",modelMap);
 	}
@@ -251,9 +251,20 @@ public class ItemOrderController {
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder itemOrder = itemOrderService.changeStatus((Long)itemId, Status.PAYED, userSession);
+		ItemOrder itemOrder = itemOrderService.changeStatus(itemId, Status.PAYED);
 		modelMap.put("itemOrder", itemOrder);
 		return new ModelAndView("createOrderForm",modelMap);
 	}
 	
+	@RequestMapping(value = "/pay/{orderId}", method = RequestMethod.GET)
+	public ModelAndView payOrder(@PathVariable Long orderId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
+		modelMap.put("itemOrder", itemOrder);
+		return new ModelAndView("payment",modelMap);
+	}
 }

@@ -17,10 +17,12 @@ public interface OfferDao {
 
 	Offer findOneOfferById(Long id);
 
-	List<Offer> findAllByCompradorIdAndStatus(Long id);
+	List<Offer> findAllMyOfferedOrders(Long id);
 
 	List<ItemOrder> findAllByVoyagerId(Long id, Status status);
 
 	List<ItemOrder> findAllActiveOffersByVoyagerId(Long id);
+
+	List<Offer> findAllOffersByItemOrderExceptCurrent(Long offerId, Long itemOrderId);
 
 }

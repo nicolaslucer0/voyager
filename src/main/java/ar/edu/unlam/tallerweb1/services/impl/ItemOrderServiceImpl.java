@@ -49,11 +49,10 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 
 	@Override
 	@Transactional
-	public ItemOrder changeStatus(Long id, Status status, User user) {
+	public ItemOrder changeStatus(Long id, Status status) {
 		ItemOrder order = findOneItemOrderById(id);
 		if (order != null) {
 			order.setStatus(status);
-			order.setVoyager(user);
 		}
 		return order;
 	}

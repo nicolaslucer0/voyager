@@ -80,10 +80,12 @@ public class OfferController {
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
-		Offer offer = offerService.findOneOfferById(offerId);
-		itemOrderService.changeStatus(itemOrder.getId(), Status.ACCEPTED, userSession);
+		 itemOrderService.findOneItemOrderById(orderId);
+		 offerService.findOneOfferById(offerId);
+		ItemOrder itemOrder = itemOrderService.changeStatus(orderId, Status.ACCEPTED);
+		Offer offer = offerService.changeStatus(offerId, Status.ACCEPTED);
 		itemOrderService.setVoyagerToOrder(itemOrder, offer);
+		offerService.cancelAllOffersExceptCurrent(offerId, orderId);
 		modelMap.addAttribute("itemOrder", itemOrder);
 		return new ModelAndView("payment",modelMap);
 	}
@@ -113,7 +115,6 @@ public class OfferController {
 		modelMap.addAttribute("order", offer);
 			return new ModelAndView("redirect:/offer/myOffers");
 	}
-	
 	
 	
 }

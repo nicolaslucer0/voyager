@@ -9,7 +9,7 @@
 	<jsp:include page='fragments/navbar.jsp' />
 	
 	<c:if test="${itemOrders eq null}">
-		<div class='alert alert-danger' role='alert'>Nadie ha realizado pedidos por ahora.</div>
+		<div class='alert alert-danger' role='alert'>Nadie ha ofertado tus pedidos por ahora.</div>
   	</c:if>
  	<div class="container">
 	<div class="d-flex align-content-around flex-wrap">
@@ -25,7 +25,7 @@
 						<p>Pais destino: <strong>${offer.itemOrder.paisDestino}</strong></p>
 					</div>
                     <div class="modal-footer">
-						<button type="button" data-url="<c:url value="/offer/${offer.id}/order/accept/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar Oferta</button>
+						<button type="button" data-url="<c:url value="/offer/${offer.id}/accept/order/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar Oferta</button>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 					</div>
 				</div>

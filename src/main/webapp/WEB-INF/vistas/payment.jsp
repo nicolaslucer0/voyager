@@ -8,9 +8,6 @@
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
-	<c:if test="${myOffers eq null}">
-		<div class="alert alert-danger" role="alert">Usted no ha realizado ninguna oferta.</div> 
-  	</c:if>
  	<div class="container">
 	<div class="d-flex align-content-around flex-wrap">
 			<!-- CARDS -->
@@ -33,20 +30,20 @@
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">Cancelar oferta?</h5>
+	        <h5 class="modal-title" id="exampleModalLongTitle">Pagar pedido?</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      <p>Al cancelar la oferta, se borrar&aacute; registro de la misma, tanto a usted como al comprador.</p>
+	      <p>Al presionar 'Pagar', ser&aacute; direccionado a la p&aacute;gina de MercadoPago</p>
 	      </div>
 	      <div class="modal-footer">
 			<input id="cancelButton" type="button" 
                     class="btn btn-danger" 
-                    value="Cancelar oferta" 
-                    data-title="Cancelar oferta" 
-                    data-message="Oferta cancelada con éxito." 
+                    value="Pagar" 
+                    data-title="Pagos" 
+                    data-message="Direccionando a MercadoPago." 
                     data-url=""/> 	        
           	<button type="button" class="btn btn-warn" data-dismiss="modal">Volver</button>
 	      </div>

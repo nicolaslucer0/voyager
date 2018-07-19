@@ -54,10 +54,9 @@ public interface ItemOrderService {
 	 * Cambia estado y devuelve el itemOrder
 	 * @param id id de pedido (#Long)
 	 * @param status Estado (Status)
-	 * @param userSession Usuario (User)
 	 * @return ItemOrder
 	 */
-	ItemOrder changeStatus(Long id, Status status, User userSession);
+	ItemOrder changeStatus(Long id, Status status);
 
 	void saveNewItemOrder(ItemOrder itemOrder, User user);
 

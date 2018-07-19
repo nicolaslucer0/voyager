@@ -47,13 +47,12 @@ public class OfferDaoImpl implements OfferDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Offer> findAllByCompradorIdAndStatus(Long id) {
+	public List<Offer> findAllMyOfferedOrders(Long id) {
 		return  sessionFactory.getCurrentSession().createCriteria(Offer.class)
 				.createAlias("itemOrder", "itemOrderFound")
 				.createAlias("itemOrderFound.comprador", "compradorBuscado")
 				.add(Restrictions.eq("compradorBuscado.id", id))
-				.add(Restrictions.ne("status", Status.REJECTED))
-				.add(Restrictions.ne("status", Status.CANCELLED))
+				.add(Restrictions.eq("status", Status.OFFERED))
 				.list();
 	}
 
@@ -73,7 +72,17 @@ public class OfferDaoImpl implements OfferDao {
 		return sessionFactory.getCurrentSession().createCriteria(Offer.class)
 				.createAlias("Voyager", "voyager")
 				.add(Restrictions.eq("voyager.id", id))
-				.add(Restrictions.ne("status", Status.CANCELLED))
+				.add(Restrictions.eq("status", Status.OFFERED))
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Offer> findAllOffersByItemOrderExceptCurrent(Long offerId, Long itemOrderId) {
+		return sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("itemOrder", "itemOrder")
+				.add(Restrictions.ne("id", offerId))
+				.add(Restrictions.ne("itemOrder.id", itemOrderId))
 				.list();
 	}
 

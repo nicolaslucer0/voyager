@@ -10,7 +10,6 @@
 <c:url var="myOffers"  value="/offer/myOffers" />
 <c:url var="myOrders"  value="/order/all"/>
 <c:url var="myOfferedItemOrders"  value="/order/myOrders/offered" />
-<c:url var="myOrdersAccepted"  value="/order/myOrders/offered" />
 <c:url var="myOrdersTravelled"  value="/order/myOrders/offered" />
 
 <c:url var="logo"  value="//img/logo.png"/> 
@@ -47,8 +46,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="${myItemOrders}">Mis nuevos pedidos</a>
         <a class="dropdown-item" href="${myOfferedItemOrders}">Ofertas sobre mis pedidos</a>
-        <a class="dropdown-item" href="${myOrdersAccepted}">Pendientes de pago</a>
-        <a class="dropdown-item" href="${myOrdersTravelled}">Pedidos en viaje</a>
+        <a class="dropdown-item" href="${myOrdersTravelled}">Pedidos en curso</a>
         <a class="dropdown-item" href="${myOrders}">Todos mis pedidos</a>
        </div>
     </li>

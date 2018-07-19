@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	$('#exampleModalCenter').on('show.bs.modal', function(event) {
-		var data = { 'orderId': $(event.relatedTarget).data('id') };
+		var btn = $(event.relatedTarget);
+		
+		
+		var data = { 'orderId': btn.data('id'), 'offerId': btn.data('offerId') };
 		
 		$('#btnMercadoPago').prop('disabled', true);
 		$('#btnMercadoPago').addClass('disabled');

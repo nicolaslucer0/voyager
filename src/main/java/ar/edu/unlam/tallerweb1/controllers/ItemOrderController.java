@@ -196,9 +196,8 @@ public class ItemOrderController {
 	
 	@RequestMapping(value = "/myOrders/getMPLink", method = RequestMethod.GET)
 	@ResponseBody
-	public String getMPLink(@RequestParam("orderId") Long orderId, HttpServletRequest request) throws JSONException, Exception {
+	public String getMPLink(@RequestParam("orderId") Long orderId, @RequestParam("offerId") Long offerId, HttpServletRequest request) throws JSONException, Exception {
 		ItemOrder item = this.itemOrderService.findOneItemOrderById(orderId);
-		
 		
 		String payload = String.format(Locale.US, "{ 'items': [ { 'title': '%s', 'quantity': %d, 'currency_id': 'ARS', 'unit_price': %f, 'id': %d, 'description': '%s', 'picture_url': '%s' } ], 'back_urls': {'success': '%s', 'failure': '%s'}, 'external_reference': %d }", 
 				item.getItem().getNombre(),
@@ -207,8 +206,8 @@ public class ItemOrderController {
 				item.getItem().getId(),
 				item.getItem().getDescripcion(),
 				item.getItem().getImagen(),
-				"https://www.google.com.ar",
-				"https://www.yahoo.com.ar",
+				"http://localhost:8080/voyager/order/payment/MP/" + offerId,
+				"http://localhost:8080/voyager/order/payment/MP/error/" + offerId,
 				orderId);
 		
 		MP mp = new MP ("4245217028796417", "yVBJxXMEkFsBl5VWNoztaupN8zVY9SkK");

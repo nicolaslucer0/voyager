@@ -26,7 +26,7 @@
 						<p>Pais destino: <strong>${offer.itemOrder.paisDestino}</strong></p>
 					</div>
                     <div class="modal-footer">
-						<button type="button" data-url="<c:url value="/offer/${offer.id}/accept/order/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar Oferta</button>
+						<button type="button" data-offer-id="${offer.id}" data-url="<c:url value="/offer/${offer.id}/accept/order/${offer.itemOrder.id}"/>" data-id="${offer.itemOrder.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Aceptar Oferta</button>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 					</div>
 				</div>

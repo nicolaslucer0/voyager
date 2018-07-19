@@ -39,7 +39,7 @@ public class ItemOrderServiceTest {
 	
 	@Inject
 	private ItemOrderService itemOrderService;
-	
+	/*
 	@Test
 	//@Transactional @Rollback(true)
 	public void crearUnItemOrderYQueDevuelvaElIdGenerado(){
@@ -66,10 +66,10 @@ public class ItemOrderServiceTest {
 		pedidoNuevo.setItem(item);
 		pedidoNuevo.setPaisDestino("Alemania");
 		
-		Boolean status = itemOrderService.saveTestItemOrder(pedidoNuevo, user);
+		//Boolean status = itemOrderService.saveTestItemOrder(pedidoNuevo, user);
 		//ItemOrder itemBuscado = itemOrderService.findOneItemOrderById(new Long(2));
 		//assertThat(pedidoNuevo.getItem().getUrl()).isEqualTo(itemBuscado.getItem().getUrl());
 		assertThat(status.booleanValue()).isEqualTo(true);
-	}
+	}*/
 
 }

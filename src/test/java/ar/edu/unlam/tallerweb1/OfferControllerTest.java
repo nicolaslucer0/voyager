@@ -72,7 +72,7 @@ public class OfferControllerTest {
 	 */
 	@Test
 	public void acceptOffer(){
-		ModelAndView vistaBuscada = new ModelAndView("payment");
+		ModelAndView vistaBuscada = new ModelAndView("redirect:/order/myOffers");
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		LoginService loginService = mock(LoginService.class);
 		ItemOrderService itemOrderService = mock(ItemOrderService.class);

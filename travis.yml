@@ -1,1 +1,7 @@
 language: java
+jdk: oraclejdk7
+script: ./mvnw clean install
+deploy:
+  provider: releases
+  api_key: "T_VzOxintB79v8zmPDipxw"
+  skip_cleanup: true

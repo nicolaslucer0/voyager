@@ -15,7 +15,7 @@
 	<jsp:include page='fragments/navbar.jsp' />
 
 	<div class="d-flex p-2 main-content centered">
-		<div class="card" style="justify-content: center; height: auto; width: 70%; padding: 2em;">
+		<div class="card search-box">
 			<div id="search">
 <%-- 			<form id="nameForm" action="<c:url value="/order/MLA/"></c:url>" method="GET"> --%>
 				<h3>Crear un pedido:</h3>
@@ -24,9 +24,7 @@
 				  <input type="text" class="form-control" id="itemName" placeholder="Nombre del producto...">
 	  				<div class="input-group-append">
 	    				<button id="findItems" class="btn btn-primary" type="button" 
-	    				data-action="<c:url value="/order/MLA/"></c:url>"  
-	    				data-search="<c:url value="/order/MLA/search"></c:url>" 
-	    				data-url="https://api.mercadolibre.com/sites/MLU/search?q=" >Crear Item</button>
+	    				data-action="<c:url value="/order/MLA/"></c:url>" >Crear Item</button>
 	  				</div>
 				</div>
 <!-- 			</form> -->
@@ -34,13 +32,17 @@
 		</div>
 		<div id="search-result-container"></div>
 		
-		<!-- Item selection card template -->
-		<div id="search-result-template" class="card item-card" style="display: none;">
-			<input type="hidden" class="id">
-			<img class="thumbnail">
-			<p class="description"></p>
-			<button type="button" class="btn btn-primary" onclick="createBasedOnThisElement()">Este es el que quiero</button>
-		</div>
 	</div>
+	<!-- Item selection card template -->
+		<div id="search-result-template" class="card" style="display: none;">
+			<input type="hidden" class="id">
+  			<div class="card-body">
+				<img class="card-img-top thumbnail">
+				<p class="description"></p>
+  			</div>
+  			<div class="card-footer text-muted">
+				<button type="button" class="btn btn-primary" onclick="createBasedOnThisElement()">Este es el que quiero</button>
+			</div>
+		</div>
 </body>
 </html>

@@ -29,7 +29,7 @@
     var wizard = tab.closest("[wizard]");
     wizard.find("button[wizard-next]").toggle(currentIndex + 1 < allTabs.length);
     wizard.find("button[wizard-previous]").toggle(currentIndex > 0);
-    wizard.find("button[wizard-last]").toggle(currentIndex + 1 == allTabs.length);
+    wizard.find("input[wizard-last]").toggle(currentIndex + 1 == allTabs.length);
   }
 
   function goToNextStep() {

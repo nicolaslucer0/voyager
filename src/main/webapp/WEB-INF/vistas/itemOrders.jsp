@@ -4,8 +4,6 @@
 
 <head>
     <jsp:include page='fragments/imports.jsp' />
-    <script type="text/javascript" src="<c:url value="//js/showConfirm.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="//js/showDetail.js"/>"></script>
 </head>
 
 <body>
@@ -76,7 +74,12 @@
                     <p>Al aceptar, se generar&aacute; una nueva oferta sobre el pedido solicitado.</p>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-primary" href="">Ofertar</a>
+                	 <input id="confirmButton" type="button" 
+	                    class="btn btn-primary" 
+	                    value="Ofertar" 
+	                    data-title="Ofertar" 
+	                    data-message="Se ha generado una nueva oferta." 
+	                    data-url=""/> 
                     <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>

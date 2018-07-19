@@ -3,7 +3,8 @@
 <html>
 <head>
 <jsp:include page='fragments/imports.jsp' />
-<script type="text/javascript" src="<c:url value="//js/cancelOffer.js"/>"></script>
+<script type="text/javascript" src="<c:url value="//js/showDetail.js"/>"></script>
+
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
@@ -14,7 +15,7 @@
 	<div class="d-flex align-content-around flex-wrap">
 			<!-- CARDS -->
 			<c:forEach var="offer" items="${myOffers}">
-				<div class="card d-flex align-items-stretch">
+                <div class="card card-item d-flex align-items-stretch"> 
 					<img class="card-img-top" alt="${offer.itemOrder.item.imagen}" src="${offer.itemOrder.item.imagen}">
 					<div class="card-body">
 						<h5 class="card-title">${offer.itemOrder.item.nombre}</h5>
@@ -24,7 +25,7 @@
 						<p>Pais destino: <strong>${offer.itemOrder.paisDestino}</strong></p>
 					</div>
                     <div class="modal-footer">
-						<button type="button" data-url='/voyager/offer/cancel/${offer.id}'  class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Cancelar oferta</button>
+						<button type="button" data-url='/voyager/offer/cancel/${offer.id}'  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Cancelar oferta</button>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 					</div>
 				</div>
@@ -69,8 +70,13 @@
 	      <p>Al cancelar la oferta, se borrar&aacute; registro de la misma, tanto a usted como al comprador.</p>
 	      </div>
 	      <div class="modal-footer">
-	        <a type="button" class="btn btn-primary" href="">Cancelar oferta</a>
-	        <button type="button" class="btn btn-warn" data-dismiss="modal">Volver</button>
+			<input id="cancelButton" type="button" 
+                    class="btn btn-danger" 
+                    value="Cancelar oferta" 
+                    data-title="Cancelar oferta" 
+                    data-message="Oferta cancelada con éxito." 
+                    data-url=""/> 	        
+          	<button type="button" class="btn btn-warn" data-dismiss="modal">Volver</button>
 	      </div>
 	    </div>
 	  </div>

@@ -33,6 +33,19 @@ public class OfferController {
 	
 	@Inject
 	private LoginService loginService;
+	
+
+	public void setOfferService(OfferService offerService) {
+		this.offerService = offerService;
+	}
+
+	public void setItemOrderService(ItemOrderService itemOrderService) {
+		this.itemOrderService = itemOrderService;
+	}
+
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
 	/**
 	 * Listar todas las ofertas con estado NEW
@@ -57,7 +70,7 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.newOffer(orderId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
 	@RequestMapping(value = "/order/accept/{orderId}", method = RequestMethod.GET)
@@ -95,7 +108,7 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.cancelOffer(offerId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
 	

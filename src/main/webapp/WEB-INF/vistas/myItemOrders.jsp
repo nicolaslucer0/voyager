@@ -4,8 +4,6 @@
 
 <head>
     <jsp:include page='fragments/imports.jsp' />
-    <script type="text/javascript" src="<c:url value="//js/showConfirm.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="//js/showDetail.js"/>"></script>
 </head>
 
 <body>
@@ -18,17 +16,17 @@
         <div class="d-flex align-content-around flex-wrap">
             <!-- CARDS -->
             <c:forEach var="order" items="${itemOrders}">
-                <div class="card card-item d-flex align-items-stretch">
+                <div class="card card-item d-flex align-items-stretch"> 
                     <img class="card-img-top" alt="${order.item.nombre}" src="${order.item.imagen}">
                     <div class="card-body">
                         <h5 class="card-title">${order.item.nombre}</h5>
-                        <p class="card-text"> ${order.item.descripcion}" </p>
+                        <p class="card-text"> ${order.item.descripcion} </p>
                         <p>Cant:<strong>${order.item.cantidad}</strong></p>
                         <p>Precio: u$s <strong>  ${order.item.precio}</strong></p>
                         <p>Pais destino: <strong>${order.paisDestino}</strong></p>
                     </div>
                     <div class="card-footer text-muted">
-					    <button type="button" data-url="<c:url value="/order/cancel/${order.id}"/>" data-id="${order.id}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Cancelar</button>
+					    <button type="button" data-url="<c:url value="/order/cancel/${order.id}"/>" data-id="${order.id}" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Cancelar</button>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 				  	</div>
                 </div>
@@ -52,7 +50,7 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-warn" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn" data-dismiss="modal">Volver</button>
                             </div>
                         </div>
                     </div>
@@ -76,8 +74,13 @@
                     <p>Al cancelar, se eliminar&aacute; su pedido y todas sus ofertas asociadas.</p>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-primary" href="">Cancelar</a>
-                    <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
+                    <input id="cancelButton" type="button" 
+                    class="btn btn-danger" 
+                    value="Cancelar pedido" 
+                    data-title="Cancelar pedido" 
+                    data-message="Pedido cancelado con éxito." 
+                    data-url=""> 
+                    <button type="button" class="btn" data-dismiss="modal">Volver</button>
                 </div>
             </div>
         </div>

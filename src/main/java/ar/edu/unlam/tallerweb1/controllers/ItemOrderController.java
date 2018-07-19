@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+>>>>>>> develop
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.dto.mercadolibre.MLItem;
 import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
@@ -26,6 +30,7 @@ import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
+import ar.edu.unlam.tallerweb1.services.MercadoLibreService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
 import com.mercadopago.*;
 @Controller
@@ -40,6 +45,25 @@ public class ItemOrderController {
 
 	@Inject
 	private OfferService offerService;
+	
+	@Inject
+	private MercadoLibreService mercadolibreService;
+
+	public void setItemOrderService(ItemOrderService itemOrderServiceMock) {
+		this.itemOrderService = itemOrderServiceMock;
+	}
+
+	public void setLoginService(LoginService loginServiceMock) {
+		this.loginService = loginServiceMock;
+	}
+
+	public void setOfferService(OfferService offerServiceMock) {
+		this.offerService = offerServiceMock;
+	}
+
+	public void setMercadolibreService(MercadoLibreService mercadolibreServiceMock) {
+		this.mercadolibreService = mercadolibreServiceMock;
+	}
 
 	/**
 	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
@@ -85,7 +109,7 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		itemOrderService.saveNewItemOrder(itemOrder, userSession);
-		return new ModelAndView("successOrder", modelMap);
+		return new ModelAndView("redirect:/order/myOrders");
 	}
 
 	/**
@@ -134,7 +158,7 @@ public class ItemOrderController {
 		if (userSession != null) {
 			itemOrderService.deleteOrderAndOffers(orderId);
 		}
-		return new ModelAndView("redirect:/myOrders");
+		return new ModelAndView("redirect:/order/myOrders");
 	}
 	
 	/**
@@ -215,10 +239,6 @@ public class ItemOrderController {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
-		String stringUrl = "https://api.mercadolibre.com/sites/MLU/search?q=";
-		stringUrl = stringUrl.concat(name);
-		stringUrl = stringUrl.concat("&limit=10");
-		
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		
@@ -233,27 +253,28 @@ public class ItemOrderController {
 		return new ModelAndView("createOrderForm",modelMap);
 	}
 	
-	@RequestMapping(value = "/MLA/search", method = RequestMethod.GET,  produces = "application/json", consumes = "application/json")
-	public ModelAndView mercadolibreToVoyager(@RequestParam String jsonData, HttpServletRequest request) {
+	@RequestMapping(value = "/MLA/search/{itemId}", method = RequestMethod.GET)
+	public ModelAndView mercadolibreToVoyager(@PathVariable String itemId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
-//		String stringUrl = "https://api.mercadolibre.com/sites/MLU/search?q=";
-//		stringUrl = stringUrl.concat(name);
-//		stringUrl = stringUrl.concat("&limit=10");
-		
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		
-		// Asociar item al form
+		MLItem mlItem = mercadolibreService.getItemDataByItemId(itemId);
+		
 		Item item = new Item();
 		ItemOrder newItemOrder = new ItemOrder();
-//		if (StringUtils.isNotEmpty(name))
-//			item.setNombre(name);
-		newItemOrder.setItem(item);
 		
+		item.setNombre(mlItem.getTitle());
+		item.setImagen(mlItem.getPictures().get(0).getUrl().toString());
+		item.setPrecio(mlItem.getPrice());
+		item.setUrl(mlItem.getPermalink().toString());
+		newItemOrder.setItem(item);
 		modelMap.put("itemOrder", newItemOrder);
 		return new ModelAndView("createOrderForm",modelMap);
 	}
+	
+	
 	
 }

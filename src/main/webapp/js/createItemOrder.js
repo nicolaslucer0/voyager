@@ -1,11 +1,12 @@
 $(document).ready(function () {
 	$("#regForm").stepWizard();
+	
+	
 	$.getJSON("/voyager/JSON/countries.JSON", function(data){
 		$("#paisDestino").select2({
 			data: data
 		});
 	});
-	
 	
 	$('#findItems').on('click', function() {
 		if (!!$('#itemName').val()){
@@ -47,11 +48,21 @@ function itemToItemCard(item) {
 	template.find(".title").text(item.title);
 	template.find(".thumbnail").attr("src", item.thumbnail);
 	template.find(".id").val(item.id);
+	template.find(".id").data("id",item.id);
+	template.find(".id").attr("data-id", item.id);
 	template.show();
 	return template;
 }
 
-//TODO: VALIDAR PASOS DEL FORM
+function createBasedOnThisElement(){
+	var template = $("#search-result-template").clone();
+	var url = "/voyager/order/MLA/search/";
+	var id = template.find(".id").data("id");
+	url = url + id;
+	location.href= url;
+
+}
+
 function validateFirstStep(){
 	var error = 0;
 	if (!$('#itemNombre').val()){
@@ -92,13 +103,32 @@ function validateFirstStep(){
 
 //TODO: VALIDAR PASOS DEL FORM
 function validateSecondStep(){
-	alert();
-}
-
-function prepareData(data){
-	debugger;
-	if(!!data){
-		data[0];
+	var error = 0;
+	if (!$('#itemDescripcion').val()){
+		$('#itemDescripcion').addClass('is-invalid');
+		error++;
+	} else {
+		$('#itemDescripcion').removeClass('is-invalid');
+		$('#itemDescripcion').addClass('is-valid');
 	}
-}
+	
+	if (!$('#itemImage').val()){
+		$('#itemImage').addClass('is-invalid');
+		error++;
+	} else {
+		$('#itemImage').removeClass('is-invalid');
+		$('#itemImage').addClass('is-valid');
+	}
+	
+	if (error > 0 )
+		return false;
+	else {
+		showToast('Pedido exitoso', 'Pedido creado con exito', 'success', 1000);
+		setTimeout(function() {
+			$("#regForm").submit();
+		}, 1000);
+	}
+		
+		
+	}
 

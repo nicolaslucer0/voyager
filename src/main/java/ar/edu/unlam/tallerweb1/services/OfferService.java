@@ -16,7 +16,7 @@ public interface OfferService {
 
 	void save(Offer offer);
 
-	Object findOneOfferById(Long id);
+	Offer findOneOfferById(Long id);
 
 	Offer newOffer(Long orderId, User userSession);
 

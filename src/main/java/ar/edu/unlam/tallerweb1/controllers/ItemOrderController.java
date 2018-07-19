@@ -222,7 +222,7 @@ public class ItemOrderController {
 		return new ModelAndView("createOrderForm",modelMap);
 	}
 	
-	@RequestMapping(value = "/MLA/search/{itemId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/MLA/search/{itemId}")
 	public ModelAndView mercadolibreToVoyager(@PathVariable String itemId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
@@ -244,6 +244,16 @@ public class ItemOrderController {
 		return new ModelAndView("createOrderForm",modelMap);
 	}
 	
-	
+	@RequestMapping(value = "/payment/MP/{itemId}", method = RequestMethod.GET)
+	public ModelAndView successPayment(@PathVariable Long itemId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		ItemOrder itemOrder = itemOrderService.changeStatus((Long)itemId, Status.PAYED, userSession);
+		modelMap.put("itemOrder", itemOrder);
+		return new ModelAndView("createOrderForm",modelMap);
+	}
 	
 }

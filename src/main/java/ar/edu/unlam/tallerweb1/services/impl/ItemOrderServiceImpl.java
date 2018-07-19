@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
+import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
@@ -97,6 +98,13 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	public void deleteOrderAndOffers(Long orderId) {
 		ItemOrder itemOrder = itemOrderDao.deleteOrderAndOffers(orderId);
 		itemOrder.setStatus(Status.CANCELLED);
+	}
+
+	@Override
+	@Transactional
+	public void setVoyagerToOrder(ItemOrder itemOrder, Offer offer) {
+		itemOrder.setVoyager(offer.getVoyager());
+		itemOrderDao.update(itemOrder);
 	}
 
 }

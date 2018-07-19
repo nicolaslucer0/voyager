@@ -73,16 +73,19 @@ public class OfferController {
 			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
-	@RequestMapping(value = "/order/accept/{orderId}", method = RequestMethod.GET)
-	public ModelAndView acceptOffer(@PathVariable Long orderId, HttpServletRequest request) {
+	@RequestMapping(value = "/{offerId}/accept/order/{orderId}", method = RequestMethod.GET)
+	public ModelAndView acceptOffer(@PathVariable Long offerId, @PathVariable Long orderId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
-		modelMap.addAttribute("payItemOrder", itemOrder);
-		return new ModelAndView("success",modelMap);
+		Offer offer = offerService.findOneOfferById(offerId);
+		itemOrderService.changeStatus(itemOrder.getId(), Status.ACCEPTED, userSession);
+		itemOrderService.setVoyagerToOrder(itemOrder, offer);
+		modelMap.addAttribute("itemOrder", itemOrder);
+		return new ModelAndView("payment",modelMap);
 	}
 
 	@RequestMapping (value = "/myOffers", method = RequestMethod.GET)

@@ -56,14 +56,14 @@ public class OfferServiceImpl implements OfferService {
 		Offer offer = new Offer();
 		offer.setItemOrder(itemOrder);
 		offer.setVoyager(userSession);
-		offer.setStatus(Status.NEW);
+		offer.setStatus(Status.OFFERED);
 		offerDao.save(offer);
 		return offer;
 	}
 
 	@Override
-	public List<Offer> findAllByCompradorIdAndStatus(Long id) {
-		return offerDao.findAllByCompradorIdAndStatus(id);
+	public List<Offer> findAllMyOfferedOrders(Long id) {
+		return offerDao.findAllMyOfferedOrders(id);
 	}
 
 	@Override
@@ -81,6 +81,23 @@ public class OfferServiceImpl implements OfferService {
 	@Override
 	public List<ItemOrder> findAllActiveOffersByVoyagerId(Long id) {
 		return offerDao.findAllActiveOffersByVoyagerId(id);
+	}
+
+	@Override
+	@Transactional
+	public void cancelAllOffersExceptCurrent(Long offerId, Long orderId) {
+		List <Offer> offers = offerDao.findAllOffersByItemOrderExceptCurrent(offerId, orderId);
+		for (Offer offer : offers) {
+			offer.setStatus(Status.CANCELLED);
+		}
+	}
+
+	@Override
+	@Transactional
+	public Offer changeStatus(Long offerId, Status status) {
+		Offer offer = offerDao.findOneOfferById(offerId);
+		offer.setStatus(status);
+		return offer;
 	}
 
 }

@@ -16,16 +16,21 @@ public interface OfferService {
 
 	void save(Offer offer);
 
-	Object findOneOfferById(Long id);
+	Offer findOneOfferById(Long id);
 
 	Offer newOffer(Long orderId, User userSession);
 
-	List<Offer> findAllByCompradorIdAndStatus(Long id);
+	List<Offer> findAllMyOfferedOrders(Long id);
 
 	Offer cancelOffer(Long offerId, User userSession);
 
 	List<ItemOrder> findAllByVoyagerId(Long id, Status status);
 
 	List<ItemOrder> findAllActiveOffersByVoyagerId(Long id);
+
+	void cancelAllOffersExceptCurrent(Long offerId, Long orderId);
+
+	Offer changeStatus(Long offerId, Status accepted);
+
 
 }

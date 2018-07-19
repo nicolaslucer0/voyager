@@ -1,12 +1,15 @@
 $(document).ready(function () {
 	$("#regForm").stepWizard();
 	
+	if (!!$('#itemNombre').val())
+		showToast('Excelente', 'Ahora complete los datos restantes', 'success', 1000);
+
+	
 	$.getJSON("/voyager/JSON/countries.JSON", function(data){
 		$("#paisDestino").select2({
 			data: data
 		});
 	});
-	
 	
 	$('#findItems').on('click', function() {
 		if (!!$('#itemName').val()){
@@ -20,7 +23,7 @@ $(document).ready(function () {
 	
 	$('#itemName').on('keyup', function() {
 		var productName = $('#itemName').val();
-		if (productName.length > 10){
+		if (productName.length > 4){
 
 			mercadoLibreService
 				.findProductsByName(productName, 5)
@@ -40,8 +43,11 @@ $(document).ready(function () {
 });
 
 /**
- * Convierte un item de MercadoLibre en un div renderizable con un preview del mismo.
- * @param {*} item 
+ * Convierte un item de MercadoLibre en un div renderizable con un preview del
+ * mismo.
+ * 
+ * @param {*}
+ *            item
  */
 function itemToItemCard(item) {
 	var template = $("#search-result-template").clone();
@@ -97,19 +103,42 @@ function validateFirstStep(){
 		$('#itemPrecio').addClass('is-valid');
 	}
 	
-	if (error > 0)
+	if (error > 0){
+		showToast('Error', 'Hay errores en los datos.', 'danger', 1000);
 		return false;
-}
-
-//TODO: VALIDAR PASOS DEL FORM
-function validateSecondStep(){
-	alert();
-}
-
-function prepareData(data){
-	debugger;
-	if(!!data){
-		data[0];
 	}
 }
+
+// TODO: VALIDAR PASOS DEL FORM
+function validateSecondStep(){
+	var error = 0;
+	if (!$('#itemDescripcion').val()){
+		$('#itemDescripcion').addClass('is-invalid');
+		error++;
+	} else {
+		$('#itemDescripcion').removeClass('is-invalid');
+		$('#itemDescripcion').addClass('is-valid');
+	}
+	
+	if (!$('#itemImage').val()){
+		$('#itemImage').addClass('is-invalid');
+		error++;
+	} else {
+		$('#itemImage').removeClass('is-invalid');
+		$('#itemImage').addClass('is-valid');
+	}
+	
+	if (error > 0 ){
+		showToast('Error', 'Hay errores en los datos.', 'danger', 1000);
+		return false;
+	}
+	else {
+		showToast('Pedido exitoso', 'Pedido creado con exito', 'success', 1000);
+		setTimeout(function() {
+			$("#regForm").submit();
+		}, 1000);
+	}
+		
+		
+	}
 

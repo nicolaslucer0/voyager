@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.services;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
+import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
 import ar.edu.unlam.tallerweb1.model.User;
 
@@ -49,13 +50,21 @@ public interface ItemOrderService {
 	Boolean updateItemOrder(ItemOrder itemOrder);
 	List<ItemOrder> findAllItemOrdersByStatusExceptCurrentUser(Long id, Status status);
 
-	ItemOrder changeStatus(Long id, Status offered, User userSession);
+	/**
+	 * Cambia estado y devuelve el itemOrder
+	 * @param id id de pedido (#Long)
+	 * @param status Estado (Status)
+	 * @return ItemOrder
+	 */
+	ItemOrder changeStatus(Long id, Status status);
 
 	void saveNewItemOrder(ItemOrder itemOrder, User user);
 
 	List<ItemOrder> findAllItemOrdersByUser(Long id);
 
 	void deleteOrderAndOffers(Long orderId);
+
+	void setVoyagerToOrder(ItemOrder itemOrder, Offer offer);
 
 
 

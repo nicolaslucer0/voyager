@@ -1,21 +1,19 @@
 package ar.edu.unlam.tallerweb1;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.math.BigDecimal;
-import java.util.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.controllers.*;
-import ar.edu.unlam.tallerweb1.model.*;
-import ar.edu.unlam.tallerweb1.services.*;
+import ar.edu.unlam.tallerweb1.controllers.OfferController;
+import ar.edu.unlam.tallerweb1.model.User;
+import ar.edu.unlam.tallerweb1.services.ItemOrderService;
+import ar.edu.unlam.tallerweb1.services.LoginService;
+import ar.edu.unlam.tallerweb1.services.OfferService;
 
 
 public class OfferControllerTest {
@@ -74,7 +72,7 @@ public class OfferControllerTest {
 		OfferController offerController = new OfferController();
 		offerController.setLoginService(loginService);
 		when(loginService.getSession(request)).thenReturn(userMock);
-		ModelAndView vistaObtenida = offerController.acceptOffer(new Long(1),request);
+		ModelAndView vistaObtenida = offerController.acceptOffer(new Long(1),null, request);
 		assertThat(vistaObtenida.getViewName()).isEqualTo(vistaBuscada.getViewName());
 	}
 	/**

@@ -17,7 +17,7 @@
 	<jsp:include page='fragments/navbar.jsp' />
 
 	<div class="d-flex p-2 main-content centered">
-		<div class="card centered" style="padding:2em;">
+		<div class="card centered" style=" width: 70%; padding:2em;">
 			<div wizard>
 				<form:form id="regForm" action="${post_url}" method="POST" modelAttribute="itemOrder">
 					<h2>Nueva orden de producto:</h2>
@@ -60,10 +60,10 @@
 						</div>
 					<div class="row">
 						<div class="col-md-12 text-right">
-							<div class="form-group">
+							<div class="form-group form-inline">
 								<button wizard-previous type="button" class="btn">Anterior</button>
 								<button wizard-next type="button" class="btn">Siguiente</button>
-								<button wizard-last class="btn btn-primary" id="startAssignationBtn">Crear item</button>
+								<input type="button" wizard-last class="btn btn-primary col-md-4" style="margin-left: 1em;" onclick="return validateSecondStep()" id="startAssignationBtn" value="Crear item">
 							</div>
 						</div>
 					</div>

@@ -70,19 +70,24 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.newOffer(orderId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
-	@RequestMapping(value = "/order/accept/{orderId}", method = RequestMethod.GET)
-	public ModelAndView acceptOffer(@PathVariable Long orderId, HttpServletRequest request) {
+	@RequestMapping(value = "/{offerId}/accept/order/{orderId}", method = RequestMethod.GET)
+	public ModelAndView acceptOffer(@PathVariable Long offerId, @PathVariable Long orderId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
-		modelMap.addAttribute("payItemOrder", itemOrder);
-		return new ModelAndView("success",modelMap);
+		 itemOrderService.findOneItemOrderById(orderId);
+		 offerService.findOneOfferById(offerId);
+		ItemOrder itemOrder = itemOrderService.changeStatus(orderId, Status.ACCEPTED);
+		Offer offer = offerService.changeStatus(offerId, Status.ACCEPTED);
+		itemOrderService.setVoyagerToOrder(itemOrder, offer);
+		offerService.cancelAllOffersExceptCurrent(offerId, orderId);
+		modelMap.addAttribute("itemOrder", itemOrder);
+		return new ModelAndView("payment",modelMap);
 	}
 
 	@RequestMapping (value = "/myOffers", method = RequestMethod.GET)
@@ -108,9 +113,8 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.cancelOffer(offerId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
-	
 	
 	
 }

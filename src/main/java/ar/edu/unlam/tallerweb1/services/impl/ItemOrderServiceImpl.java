@@ -141,6 +141,10 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		return fin;
 	}
 	
+	public void setOfferDao(OfferDao offerDao) {
+		this.offerDao = offerDao;
+	}
+
 	@Override
 	@Transactional
 	public Boolean changeStatusVoyage(Long id, StatusVoyage status, Long user) {

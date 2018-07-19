@@ -6,20 +6,35 @@
 <c:url var="bootstrapJS" value="//js/bootstrap.min.js" />
 <c:url var="jQuery" value="//js/jquery.js" />
 
+<c:url var="toasterJS" value="//js/toaster/jquery.toaster.js" />
+<c:url var="myToast" value="//js/showToast.js" />
+<c:url var="toasterCSS" value="//css/toaster/jquery.toast.min.css" />
+
 <c:url var="select2JS" value="//js/select2/select2.min.js" />
 <c:url var="select2CSS" value="//css/select2/select2.min.css" />
 
 <c:url var="mercadoLibreServiceJS" value="//js/mercadolibre.service.js" />
+
+<c:url var="primary" value="//js/confirmPrimary.js" />
+<c:url var="danger" value="//js/confirmDanger.js" />
+<c:url var="detail" value="//js/showDetail.js" />
 
 <c:url var="img" value="//img/" />
 
 <script src="${jQuery}" type="text/javascript"></script>
 <script src="${bootstrapJS}" type="text/javascript"></script>
 <script src="${select2JS}" type="text/javascript"></script>
+<script src="${toasterJS}" type="text/javascript"></script>
+<script src="${myToast}" type="text/javascript"></script>
+
+<script src="${primary}" type="text/javascript"></script>
+<script src="${danger}" type="text/javascript"></script>
+<script src="${detail}" type="text/javascript"></script>
 
 <link href="${boostrapCSS}" rel="stylesheet">
 <link href="${mainCSS}" rel="stylesheet">
 <link href="${select2CSS}" rel="stylesheet">
+<link href="${toasterCSS}" rel="stylesheet">
 
 <script src="${mercadoLibreServiceJS}" type="text/javascript"></script>
 

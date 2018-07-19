@@ -57,7 +57,7 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.newOffer(orderId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
 	@RequestMapping(value = "/order/accept/{orderId}", method = RequestMethod.GET)
@@ -95,7 +95,7 @@ public class OfferController {
 		modelMap.put("userSession", userSession);
 		Offer offer = offerService.cancelOffer(offerId, userSession);
 		modelMap.addAttribute("order", offer);
-			return new ModelAndView("success",modelMap);
+			return new ModelAndView("redirect:/offer/myOffers");
 	}
 	
 	

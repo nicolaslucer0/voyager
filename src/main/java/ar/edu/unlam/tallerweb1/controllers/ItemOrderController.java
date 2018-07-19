@@ -85,7 +85,7 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		itemOrderService.saveNewItemOrder(itemOrder, userSession);
-		return new ModelAndView("successOrder", modelMap);
+		return new ModelAndView("redirect:/order/myOrders");
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class ItemOrderController {
 		if (userSession != null) {
 			itemOrderService.deleteOrderAndOffers(orderId);
 		}
-		return new ModelAndView("redirect:/myOrders");
+		return new ModelAndView("redirect:/order/myOrders");
 	}
 	
 	/**

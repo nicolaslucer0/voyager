@@ -9,15 +9,15 @@
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
 	<c:if test="${myOffers eq null}">
-		<div class="alert alert-danger" role="alert">Usted no ha realizado ninguna oferta.</div> 
+		<div class='alert alert-danger centered' style="text-align: center; width: 80%; margin:20% auto 0 auto;" role="alert">Usted no ha realizado ninguna oferta.</div> 
   	</c:if>
  	<div class="container">
 		<div class="d-flex align-content-around flex-wrap">
-	    <div class="card card-item d-flex align-items-stretch"> 
-			<h2>Excelente ! El pedido se ha entregado con éxito </h2>
-			<p> Tanto el comprador como el viajero han confirmado la entrega</p>
-			<h2>Gracias por utilizar Voyager.</h2>
-		</div>
+				<div class='alert alert-success centered' style="text-align: center; width: 80%; margin:20% auto 0 auto;" >
+					<h2>Excelente, El pedido se ha entregado con éxito!</h2>
+					<p> Tanto el comprador como el viajero han confirmado la entrega</p>
+					<h5>Gracias por utilizar Voyager.</h5>
+				</div>
 		</div>
 	</div>
 </body>

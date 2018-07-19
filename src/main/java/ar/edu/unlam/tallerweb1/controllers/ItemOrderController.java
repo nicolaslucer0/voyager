@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Locale;
 
@@ -266,7 +268,7 @@ public class ItemOrderController {
 		
 		item.setNombre(mlItem.getTitle());
 		item.setImagen(mlItem.getPictures().get(0).getUrl().toString());
-		item.setPrecio(mlItem.getPrice());
+		item.setPrecio(mlItem.getPrice() != null ? mlItem.getPrice().divide(new BigDecimal(28),2, RoundingMode.HALF_UP) : mlItem.getPrice());
 		item.setUrl(mlItem.getPermalink().toString());
 		newItemOrder.setItem(item);
 		modelMap.put("itemOrder", newItemOrder);

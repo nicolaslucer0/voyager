@@ -10,7 +10,7 @@
     <jsp:include page='fragments/navbar.jsp' />
 
     <c:if test="${itemOrders eq null}">
-        <div class='alert alert-danger' role='alert'>Usted no ha realizado ningun pedido.</div>
+       <div class='alert alert-danger centered' style="text-align: center; width: 80%; margin:20% auto 0 auto;" role='alert'>Usted no ha realizado ningun pedido.</div>
     </c:if>
     <div class="container">
         <div class="d-flex align-content-around flex-wrap">
@@ -24,9 +24,10 @@
                         <p>Cant:<strong>${order.item.cantidad}</strong></p>
                         <p>Precio: u$s <strong>  ${order.item.precio}</strong></p>
                         <p>Pais destino: <strong>${order.paisDestino}</strong></p>
+                        <p>Pais destino: <strong>${order.status}</strong></p>
                     </div>
                     <div class="card-footer text-muted">
-					    <button type="button" data-url="<c:url value="/order/cancel/${order.id}"/>" data-id="${order.id}" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Cancelar</button>
+<%-- 					    <button type="button" data-url="<c:url value="/order/cancel/${order.id}"/>" data-id="${order.id}" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Cancelar</button> --%>
                         <a data-toggle="modal" data-target="#detailModal${order.id}" class="btn btn-default detail" role="button">Detalle</a>
 				  	</div>
                 </div>

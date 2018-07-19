@@ -9,11 +9,11 @@
 <body>
     <jsp:include page='fragments/navbar.jsp' />
 
-    <c:if test="${itemOrders eq null}">
-        <div class='alert alert-danger' role='alert'>Usted no ha realizado ningun pedido.</div>
-    </c:if>
     <div class="container">
         <div class="d-flex align-content-around flex-wrap">
+	    <c:if test="${itemOrders eq null}">
+	        <div class='alert alert-danger centered' style="text-align: center; width: 80%; margin:20% auto 0 auto;" role='alert'>Usted no ha realizado ningun pedido.</div>
+	    </c:if>
             <!-- CARDS -->
             <c:forEach var="order" items="${itemOrders}">
                 <div class="card card-item d-flex align-items-stretch"> 

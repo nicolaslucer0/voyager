@@ -39,7 +39,10 @@ function validateForm(type){
 	}
 	
 	if (err == 0){
-		$('#regForm').submit();
+		showToast('Exito','Exito','success');
+		setTimeout(function() {
+			$("#regForm").submit();
+		}, 1000);
 	} else {
 		showToast('Error','Por favor, complete los campos para continuar','danger');
 	}

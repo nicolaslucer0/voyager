@@ -272,16 +272,20 @@ public class ItemOrderController {
 		return new ModelAndView("createOrderForm",modelMap);
 	}
 	
-	@RequestMapping(value = "/payment/MP/{itemId}", method = RequestMethod.GET)
-	public ModelAndView successPayment(@PathVariable Long itemId, HttpServletRequest request) {
+	@RequestMapping(value = "/payment/MP/{offerId}", method = RequestMethod.GET)
+	public ModelAndView successPayment(@PathVariable Long offerId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder itemOrder = itemOrderService.changeStatus(itemId, Status.PAYED);
+		Offer offer = offerService.changeStatus(offerId, Status.ACCEPTED);
+		ItemOrder itemOrder = itemOrderService.changeStatus(offer.getItemOrder().getId(), Status.ACCEPTED);
+		itemOrderService.setVoyagerToOrder(itemOrder, offer);
+		offerService.cancelAllOffersExceptCurrent(offerId, itemOrder.getId());
+		modelMap.addAttribute("itemOrder", itemOrder);		
 		modelMap.put("itemOrder", itemOrder);
-		return new ModelAndView("createOrderForm",modelMap);
+		return new ModelAndView("payedOrder",modelMap);
 	}
 	
 	@RequestMapping(value = "/pay/{orderId}", method = RequestMethod.GET)

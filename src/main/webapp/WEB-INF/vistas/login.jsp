@@ -19,15 +19,15 @@
 					<hr class="colorgraph">
 					<br>
 					<h4>Ingrese su email y contraseña para continuar</h4>
-					<br>
-
-					<form:input path="email" id="email" type="email"
-						class="form-control" placeholder="Email" />
-					<br>
-					<form:input path="password" type="password" id="password"
-						class="form-control" placeholder="Contraseña" />
-					<br>
-					<input type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm('L')" value="Iniciar sesion" />
+					<div class="form-group">
+						<form:input path="email" id="email" type="email" class="form-control" placeholder="Email" />
+					</div>
+					<div class="form-group">
+						<form:input path="password" type="password" id="password" class="form-control" placeholder="Contraseña" />
+					</div>
+					<div class="form-group">
+						<input type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm('L')" value="Iniciar sesion" />
+					</div>
 				</form:form>
 
 				<span id="errorForm" data-error="${error}"></span>

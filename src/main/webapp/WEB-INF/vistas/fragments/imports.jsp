@@ -41,7 +41,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-<title>Voyager.</title>
+<title>Voyager. - Compra y viaja.</title>
 
 <link rel="apple-touch-icon" sizes="57x57" href="${img}apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="${img}apple-icon-60x60.png">

@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
->>>>>>> develop
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.dto.mercadolibre.MLItem;
@@ -66,7 +63,7 @@ public class ItemOrderController {
 	}
 
 	/**
-	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
+	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que estï¿½ loggeado)
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -99,7 +96,7 @@ public class ItemOrderController {
 	/**
 	 * Se utiliza para el boton "guardar" del formuario.
 	 * @param itemOrder: Recibe el pedido entero que viene del formulario 
-	 * @return ModelAndView: La pagina JSP de exito o error depende si se guardó o no con un mensaje para poner el el JSP.
+	 * @return ModelAndView: La pagina JSP de exito o error depende si se guardï¿½ o no con un mensaje para poner el el JSP.
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder, HttpServletRequest request) {
@@ -181,7 +178,7 @@ public class ItemOrderController {
 	}
 	
 	/**
-	 * Nuestros pedidos que alguien ofertó.
+	 * Nuestros pedidos que alguien ofertï¿½.
 	 * @param request
 	 * @return Lista de pedidos ya ofertados por alguien
 	 */

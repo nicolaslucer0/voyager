@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.services.impl;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -77,15 +78,19 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		return itemOrderDao.findAllItemOrderByVoyagerIdAndStatus(id, status);
 	}
 
+	public void setItemOrderDao(ItemOrderDao itemOrderDaoMock) {
+		this.itemOrderDao = itemOrderDaoMock;
+	}
+
 	@Override
-	public void saveNewItemOrder(ItemOrder itemOrder, User user) {
+	public Serializable saveNewItemOrder(ItemOrder itemOrder, User user) {
 		itemOrder.setComprador(user);
 		itemOrder.setStatus(Status.NEW);
 		calcularPrecios(itemOrder);
-		itemOrderDao.save(itemOrder);
-		
+		Serializable id =itemOrderDao.save(itemOrder);
+		return id;
 	}
-
+	
 	private void calcularPrecios(ItemOrder itemOrder) {
 		itemOrder.setPrecioComisionVoyager(itemOrder.getItem().getPrecio().add(itemOrder.getItem().getPrecio().multiply(new BigDecimal("0.10"))));
 		itemOrder.setPrecioFinal(itemOrder.getItem().getPrecio().add((itemOrder.getItem().getPrecio().multiply(new BigDecimal("0.10"))).multiply(new BigDecimal("2"))));

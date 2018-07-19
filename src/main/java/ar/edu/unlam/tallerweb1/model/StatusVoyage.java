@@ -4,5 +4,7 @@ public enum StatusVoyage {
 	NUEVO,
 	ENTREGADO,
 	RECIBIDO,
-	ERROR
+	ERROR,
+	COMPRANDO,
+	VIAJANDO
 }

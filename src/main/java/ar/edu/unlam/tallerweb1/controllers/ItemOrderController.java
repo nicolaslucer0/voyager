@@ -26,6 +26,7 @@ import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
@@ -320,9 +321,37 @@ public class ItemOrderController {
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
 		if (userSession != null) {
-			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.PAYED);
+			List <ItemOrder> itemOrders = itemOrderService.findAllByVoyagerIdAndStatus(userSession.getId(), Status.PAYED);
 			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null);
 		}
-		return new ModelAndView("myItemOrders", modelMap);
+		return new ModelAndView("myDelivers", modelMap);
 	}
+	
+	@RequestMapping(value = "/received/{orderId}", method = RequestMethod.GET)
+	public ModelAndView ordersToDeliver(@PathVariable Long orderId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		Boolean fin = itemOrderService.receiveProduct(orderId);
+		if (fin)
+			return new ModelAndView("finished");
+		return new ModelAndView("redirect:/order/payed");
+	}
+
+	@RequestMapping(value = "/change/status/{orderId}/{status}", method = RequestMethod.GET)
+	public ModelAndView changeStatusVoyage(@PathVariable Long orderId, @PathVariable String status, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		Boolean fin = itemOrderService.changeStatusVoyage(orderId, StatusVoyage.valueOf(status), userSession.getId());
+		if (fin)
+			return new ModelAndView("finished");
+		return new ModelAndView("redirect:/order/delivers");
+	}
+	
+	
 }

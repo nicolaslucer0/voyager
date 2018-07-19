@@ -10,7 +10,8 @@
 <c:url var="myOffers"  value="/offer/myOffers" />
 <c:url var="myOrders"  value="/order/all"/>
 <c:url var="myOfferedItemOrders"  value="/order/myOrders/offered" />
-<c:url var="myOrdersTravelled"  value="/order/myOrders/offered" />
+<c:url var="myOrdersTravelled"  value="/order/payed"/>
+<c:url var="myDelivers"  value="/order/delivers"/>
 
 <c:url var="logo"  value="//img/logo.png"/> 
 
@@ -57,6 +58,7 @@
     	</a>
       	<div class="dropdown-menu">
 			<a class="dropdown-item" href="${myOffers}">Ofertas que he creado</a>
+			<a class="dropdown-item" href="${myDelivers}">Pedidos a entregar</a>
  		</div>	
 	</li>
 

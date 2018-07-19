@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
+import ar.edu.unlam.tallerweb1.dao.OfferDao;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
@@ -23,6 +24,9 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 
 	@Inject
 	private ItemOrderDao itemOrderDao;
+	
+	@Inject
+	private OfferDao offerDao;
 	
 	@Override
 	public List<ItemOrder> getAllItemOrders() {
@@ -114,6 +118,45 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 	public void setVoyagerToOrder(ItemOrder itemOrder, Offer offer) {
 		itemOrder.setVoyager(offer.getVoyager());
 		itemOrderDao.update(itemOrder);
+	}
+
+	@Override
+	public List<ItemOrder> findAllByCompradorIdAndStatusAndStatusVoyage(Long id, Status status, StatusVoyage statusVoyage) {
+		return itemOrderDao.findAllByCompradorIdAndStatusAndStatusVoyage(id,status,statusVoyage);
+	}
+
+	@Override
+	@Transactional
+	public Boolean receiveProduct(Long id) {
+		Boolean fin = false;
+		ItemOrder order = itemOrderDao.findOneItemOrderById(id);
+		Offer offer = offerDao.findOneOfferById(order.getId());
+		order.setEstadoRecibo(StatusVoyage.RECIBIDO);
+		
+		if (StatusVoyage.ENTREGADO.equals(order.getEstadoEntrega())) {
+			order.setStatus(Status.FINISHED);
+			offer.setStatus(Status.FINISHED);
+			fin = true;
+		}
+		return fin;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean changeStatusVoyage(Long id, StatusVoyage status, Long user) {
+		Boolean fin = false;
+		ItemOrder order = itemOrderDao.findOneItemOrderById(id);
+		Offer offer = offerDao.findOneOfferByOrderIdAndUserAndStatus(order.getId(), user, status);
+		order.setEstadoEntrega(status);
+
+		if (StatusVoyage.ENTREGADO.equals(status)) {
+			if (StatusVoyage.RECIBIDO.equals(order.getEstadoRecibo())) {
+				order.setStatus(Status.FINISHED);
+				offer.setStatus(Status.FINISHED);
+				fin = true;
+			}
+		}
+		return fin;
 	}
 
 }

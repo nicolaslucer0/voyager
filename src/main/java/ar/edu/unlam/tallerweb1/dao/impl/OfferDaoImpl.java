@@ -13,6 +13,7 @@ import ar.edu.unlam.tallerweb1.dto.OfferDTO;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 
 @Repository
 public class OfferDaoImpl implements OfferDao {
@@ -84,6 +85,17 @@ public class OfferDaoImpl implements OfferDao {
 				.add(Restrictions.ne("id", offerId))
 				.add(Restrictions.ne("itemOrder.id", itemOrderId))
 				.list();
+	}
+
+	@Override
+	public Offer findOneOfferByOrderIdAndUserAndStatus(Long id, Long user, StatusVoyage status) {
+		return (Offer) sessionFactory.getCurrentSession().createCriteria(Offer.class)
+				.createAlias("itemOrder", "itemOrder")
+				.createAlias("Voyager", "user")
+				.add(Restrictions.eq("itemOrder.id", id))
+				.add(Restrictions.eq("user.id", user))
+				.add(Restrictions.eq("status", Status.PAYED))
+				.uniqueResult();
 	}
 
 

@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.dto.OfferDTO;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 
 public interface OfferDao {
 
@@ -24,5 +25,7 @@ public interface OfferDao {
 	List<ItemOrder> findAllActiveOffersByVoyagerId(Long id);
 
 	List<Offer> findAllOffersByItemOrderExceptCurrent(Long offerId, Long itemOrderId);
+
+	Offer findOneOfferByOrderIdAndUserAndStatus(Long id, Long user, StatusVoyage status);
 
 }

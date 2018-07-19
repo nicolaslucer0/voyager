@@ -39,7 +39,11 @@ function validateForm(type){
 	}
 	
 	if (err == 0){
-		showToast('Exito','Exito','success');
+		if (type == 'R')
+			showToast('Registro','Registro exitoso','success');
+		else 
+			showToast('Login','Login exitoso','success'); 
+			
 		setTimeout(function() {
 			$("#regForm").submit();
 		}, 1000);

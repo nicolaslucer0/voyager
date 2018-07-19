@@ -10,10 +10,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
-import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 
 @Repository
 public class ItemOrderDaoImpl implements ItemOrderDao {
@@ -125,6 +125,16 @@ public class ItemOrderDaoImpl implements ItemOrderDao {
 //		sessionFactory.getCurrentSession().delete(item);
 		
 		return itemOrder;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ItemOrder> findAllByCompradorIdAndStatusAndStatusVoyage(Long id, Status status, StatusVoyage statusVoyage) {
+		return sessionFactory.getCurrentSession().createCriteria(ItemOrder.class)
+				.add(Restrictions.eq("id", id))
+				.add(Restrictions.eq("status", status))
+				.add(Restrictions.eq("statusVoyage", statusVoyage))
+				.list();
 	}
 
 }

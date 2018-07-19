@@ -67,5 +67,11 @@ public interface ItemOrderService {
 
 	void setVoyagerToOrder(ItemOrder itemOrder, Offer offer);
 
+	List<ItemOrder> findAllByCompradorIdAndStatusAndStatusVoyage(Long id, Status payed, StatusVoyage viajando);
+
+	Boolean receiveProduct(Long id);
+
+	Boolean changeStatusVoyage(Long id, StatusVoyage status, Long user);
+
 
 }

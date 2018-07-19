@@ -4,6 +4,7 @@ public enum Status {
 	ACCEPTED,
 	ALL,
 	CANCELLED,
+	FINISHED,
 	NEW,
     OFFERED,
     PAYED,

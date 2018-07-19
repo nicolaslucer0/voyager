@@ -5,6 +5,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 
 public interface ItemOrderDao {
 
@@ -27,5 +28,7 @@ public interface ItemOrderDao {
 	List<ItemOrder> findAllItemOrdersByUser(Long id);
 
 	ItemOrder deleteOrderAndOffers(Long orderId);
+
+	List<ItemOrder> findAllByCompradorIdAndStatusAndStatusVoyage(Long id, Status status, StatusVoyage statusVoyage);
 
 }

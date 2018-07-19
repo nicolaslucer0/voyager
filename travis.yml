@@ -1,11 +1,10 @@
 language: java
-jdk: oraclejdk8
-install: true
+jdk: oraclejdk7
 script: ./mvnw clean install
 deploy:
   provider: releases
   api_key: "T_VzOxintB79v8zmPDipxw"
-  file: /directory/*
+  # file: /directory/*
   skip_cleanup: true
   on:
     tags: true

@@ -279,24 +279,26 @@ public class ItemOrderController {
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		Offer offer = offerService.changeStatus(offerId, Status.ACCEPTED);
-		ItemOrder itemOrder = itemOrderService.changeStatus(offer.getItemOrder().getId(), Status.ACCEPTED);
+		Offer offer = offerService.changeStatus(offerId, Status.PAYED);
+		ItemOrder itemOrder = itemOrderService.changeStatus(offer.getItemOrder().getId(), Status.PAYED);
 		itemOrderService.setVoyagerToOrder(itemOrder, offer);
 		offerService.cancelAllOffersExceptCurrent(offerId, itemOrder.getId());
 		modelMap.addAttribute("itemOrder", itemOrder);		
 		modelMap.put("itemOrder", itemOrder);
-		return new ModelAndView("payedOrder",modelMap);
+		return new ModelAndView("redirect:/order/payed");
 	}
 	
-	@RequestMapping(value = "/pay/{orderId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/payed", method = RequestMethod.GET)
 	public ModelAndView payOrder(@PathVariable Long orderId, HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");
 		ModelMap modelMap = new ModelMap();
 		modelMap.put("userSession", userSession);
-		ItemOrder itemOrder = itemOrderService.findOneItemOrderById(orderId);
-		modelMap.put("itemOrder", itemOrder);
-		return new ModelAndView("payment",modelMap);
+		if (userSession != null) {
+			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.PAYED);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null);
+		}
+		return new ModelAndView("myItemOrders", modelMap);
 	}
 }

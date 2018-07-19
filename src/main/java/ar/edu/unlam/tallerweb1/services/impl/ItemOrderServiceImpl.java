@@ -12,6 +12,7 @@ import ar.edu.unlam.tallerweb1.dao.ItemOrderDao;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 import ar.edu.unlam.tallerweb1.model.User;
 import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 
@@ -53,6 +54,10 @@ public class ItemOrderServiceImpl implements ItemOrderService {
 		ItemOrder order = findOneItemOrderById(id);
 		if (order != null) {
 			order.setStatus(status);
+			if(Status.PAYED.equals(status)) {
+				order.setEstadoEntrega(StatusVoyage.NUEVO);
+				order.setEstadoRecibo(StatusVoyage.NUEVO);
+			}
 		}
 		return order;
 	}

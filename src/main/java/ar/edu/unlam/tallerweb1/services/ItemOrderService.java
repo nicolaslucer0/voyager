@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
 import ar.edu.unlam.tallerweb1.model.Offer;
 import ar.edu.unlam.tallerweb1.model.Status;
+import ar.edu.unlam.tallerweb1.model.StatusVoyage;
 import ar.edu.unlam.tallerweb1.model.User;
 
 /**
@@ -65,7 +66,6 @@ public interface ItemOrderService {
 	void deleteOrderAndOffers(Long orderId);
 
 	void setVoyagerToOrder(ItemOrder itemOrder, Offer offer);
-
 
 
 }

@@ -31,7 +31,6 @@
 			</div>
 		</div>
 		<div id="search-result-container"></div>
-		
 	</div>
 	<!-- Item selection card template -->
 		<div id="search-result-template" class="card" style="display: none;">

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mercadopago.MP;
+
 import ar.edu.unlam.tallerweb1.dto.mercadolibre.MLItem;
 import ar.edu.unlam.tallerweb1.model.Item;
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
@@ -29,7 +31,6 @@ import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
 import ar.edu.unlam.tallerweb1.services.MercadoLibreService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
-import com.mercadopago.*;
 @Controller
 @RequestMapping("/order")
 public class ItemOrderController {
@@ -288,8 +289,32 @@ public class ItemOrderController {
 		return new ModelAndView("redirect:/order/payed");
 	}
 	
+	@RequestMapping(value = "/payment/MP/error/{offerId}", method = RequestMethod.GET)
+	public ModelAndView errorPayment(@PathVariable Long offerId, HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		return new ModelAndView("errorPayment", modelMap);
+	}
+	
 	@RequestMapping(value = "/payed", method = RequestMethod.GET)
-	public ModelAndView payOrder(@PathVariable Long orderId, HttpServletRequest request) {
+	public ModelAndView payOrder(HttpServletRequest request) {
+		User userSession = loginService.getSession(request);
+		if (userSession == null)
+			return new ModelAndView("redirect:/login");
+		ModelMap modelMap = new ModelMap();
+		modelMap.put("userSession", userSession);
+		if (userSession != null) {
+			List <ItemOrder> itemOrders = itemOrderService.findAllByCompradorIdAndStatus(userSession.getId(), Status.PAYED);
+			modelMap.put("itemOrders", itemOrders.size() != 0 ? itemOrders : null);
+		}
+		return new ModelAndView("myPayments", modelMap);
+	}
+	
+	@RequestMapping(value = "/delivers", method = RequestMethod.GET)
+	public ModelAndView ordersToDeliver(HttpServletRequest request) {
 		User userSession = loginService.getSession(request);
 		if (userSession == null)
 			return new ModelAndView("redirect:/login");

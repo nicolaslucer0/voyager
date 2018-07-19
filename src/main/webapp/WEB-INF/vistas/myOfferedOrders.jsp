@@ -49,9 +49,10 @@
       </div>
       <div class="modal-body">
       <p>Luego de aceptar, se generar&aacute; una orden de pago via MercadoPago.</p>
+      <p>Se esta generado el link de pago. Una vez terminado se habilitara el boton</p>
       </div>
       <div class="modal-footer">
-        <a type="button" class="btn btn-primary" href="">Aceptar oferta</a>
+        <a type="button" class="btn btn-primary disabled" disabled href="" id="btnMercadoPago">Pagar en Mercado Pago</a>
         <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
       </div>
     </div>

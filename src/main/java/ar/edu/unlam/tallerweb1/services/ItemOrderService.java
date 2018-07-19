@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.model.ItemOrder;
@@ -59,7 +60,8 @@ public interface ItemOrderService {
 	 */
 	ItemOrder changeStatus(Long id, Status status);
 
-	void saveNewItemOrder(ItemOrder itemOrder, User user);
+	Serializable saveNewItemOrder(ItemOrder itemOrder, User user);
+	//Boolean saveTestItemOrder(ItemOrder itemOrder, User user);
 
 	List<ItemOrder> findAllItemOrdersByUser(Long id);
 

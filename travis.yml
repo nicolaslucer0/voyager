@@ -4,5 +4,4 @@ script: ./mvnw clean install
 deploy:
   provider: releases
   api_key: "T_VzOxintB79v8zmPDipxw"
-  # file: /directory/*
   skip_cleanup: true

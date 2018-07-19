@@ -338,7 +338,7 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		Boolean fin = itemOrderService.receiveProduct(orderId);
 		if (fin)
-			return new ModelAndView("finished");
+			return new ModelAndView("finished", modelMap);
 		return new ModelAndView("redirect:/order/payed");
 	}
 
@@ -351,7 +351,7 @@ public class ItemOrderController {
 		modelMap.put("userSession", userSession);
 		Boolean fin = itemOrderService.changeStatusVoyage(orderId, StatusVoyage.valueOf(status), userSession.getId());
 		if (fin)
-			return new ModelAndView("finished");
+			return new ModelAndView("finished", modelMap);
 		return new ModelAndView("redirect:/order/delivers");
 	}
 	

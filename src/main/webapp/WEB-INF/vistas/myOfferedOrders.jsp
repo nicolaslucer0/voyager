@@ -3,7 +3,7 @@
 <html>
 <head>
 <jsp:include page='fragments/imports.jsp' />
-<script type="text/javascript" src="<c:url value="//js/showConfirm.js"/>"></script>
+<script type="text/javascript" src="<c:url value="//js/mercadoPagoBoton.js"/>"></script>
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />

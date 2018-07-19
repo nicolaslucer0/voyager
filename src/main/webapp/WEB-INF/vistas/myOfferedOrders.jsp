@@ -3,7 +3,7 @@
 <html>
 <head>
 <jsp:include page='fragments/imports.jsp' />
-<script type="text/javascript" src="<c:url value="//js/showConfirm.js"/>"></script>
+<script type="text/javascript" src="<c:url value="//js/mercadoPagoBoton.js"/>"></script>
 </head>
 <body>
 	<jsp:include page='fragments/navbar.jsp' />
@@ -69,16 +69,20 @@
       </div>
       <div class="modal-body">
       <p>Luego de aceptar, se generar&aacute; una orden de pago via MercadoPago.</p>
+      <p>Se esta generado el link de pago. Una vez terminado se habilitara el boton</p>
       </div>
       <div class="modal-footer">
-                	 <input id="confirmButton" type="button" 
-	                    class="btn btn-primary" 
+                	 <input id="btnMercadoPago" type="button" 
+	                    class="btn btn-primary disabled" 
 	                    value="Aceptar oferta" 
 	                    data-title="Aceptar oferta" 
-	                    data-message="Aceptando oferta..." 
+	                    data-message="Aceptando oferta..."
+	                    disabled 
 	                    data-url=""/> 
                     <button type="button" class="btn btn-warn" data-dismiss="modal">Cancelar</button>
-                </div>
+<!--         <a type="button" class="btn btn-primary disabled" disabled href="" id="btnMercadoPago">Pagar en Mercado Pago</a> -->
+      </div>
+      </div>
     </div>
   </div>
 </div>

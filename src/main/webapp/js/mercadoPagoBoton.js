@@ -1,0 +1,20 @@
+$(document).ready(function() {
+	$('#exampleModalCenter').on('show.bs.modal', function(event) {
+		var data = { 'orderId': $(event.relatedTarget).data('id') };
+		
+		$('#btnMercadoPago').prop('disabled', true);
+		$('#btnMercadoPago').addClass('disabled');
+		
+		$.ajax({
+			type : "get",
+			data : data,
+			url : "getMPLink",
+			success : function(urlMP) {
+				$('#btnMercadoPago').attr('href', urlMP);
+				$('#btnMercadoPago').prop('disabled', false);
+				$('#btnMercadoPago').removeClass('disabled');
+			}
+		});
+		
+	});
+});

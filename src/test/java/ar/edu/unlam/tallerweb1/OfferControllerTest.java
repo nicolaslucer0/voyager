@@ -74,7 +74,7 @@ public class OfferControllerTest {
 		OfferController offerController = new OfferController();
 		offerController.setLoginService(loginService);
 		when(loginService.getSession(request)).thenReturn(userMock);
-		ModelAndView vistaObtenida = offerController.acceptOffer(new Long(1),request);
+		ModelAndView vistaObtenida = offerController.acceptOffer(new Long(1),null, request);
 		assertThat(vistaObtenida.getViewName()).isEqualTo(vistaBuscada.getViewName());
 	}
 	/**

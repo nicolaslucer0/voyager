@@ -1,17 +1,22 @@
 package ar.edu.unlam.tallerweb1.controllers;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.dto.mercadolibre.MLItem;
@@ -24,7 +29,7 @@ import ar.edu.unlam.tallerweb1.services.ItemOrderService;
 import ar.edu.unlam.tallerweb1.services.LoginService;
 import ar.edu.unlam.tallerweb1.services.MercadoLibreService;
 import ar.edu.unlam.tallerweb1.services.OfferService;
-
+import com.mercadopago.*;
 @Controller
 @RequestMapping("/order")
 public class ItemOrderController {
@@ -58,7 +63,7 @@ public class ItemOrderController {
 	}
 
 	/**
-	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que está loggeado)
+	 * Listado de pedidos con estado ALL y que no pertenezcan al usuario en cuestion (Si es que estï¿½ loggeado)
 	 * @return ModelAndView : La pagina JSP que muestra el listado y el objeto lista de orderItem.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
@@ -91,7 +96,7 @@ public class ItemOrderController {
 	/**
 	 * Se utiliza para el boton "guardar" del formuario.
 	 * @param itemOrder: Recibe el pedido entero que viene del formulario 
-	 * @return ModelAndView: La pagina JSP de exito o error depende si se guardó o no con un mensaje para poner el el JSP.
+	 * @return ModelAndView: La pagina JSP de exito o error depende si se guardï¿½ o no con un mensaje para poner el el JSP.
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView saveItemOrder(@ModelAttribute ItemOrder itemOrder, HttpServletRequest request) {
@@ -173,7 +178,7 @@ public class ItemOrderController {
 	}
 	
 	/**
-	 * Nuestros pedidos que alguien ofertó.
+	 * Nuestros pedidos que alguien ofertï¿½.
 	 * @param request
 	 * @return Lista de pedidos ya ofertados por alguien
 	 */
@@ -189,6 +194,29 @@ public class ItemOrderController {
 		return new ModelAndView("myOfferedOrders",modelMap);
 	}
 	
+	@RequestMapping(value = "/myOrders/getMPLink", method = RequestMethod.GET)
+	@ResponseBody
+	public String getMPLink(@RequestParam("orderId") Long orderId, HttpServletRequest request) throws JSONException, Exception {
+		ItemOrder item = this.itemOrderService.findOneItemOrderById(orderId);
+		
+		
+		String payload = String.format(Locale.US, "{ 'items': [ { 'title': '%s', 'quantity': %d, 'currency_id': 'ARS', 'unit_price': %f, 'id': %d, 'description': '%s', 'picture_url': '%s' } ], 'back_urls': {'success': '%s', 'failure': '%s'}, 'external_reference': %d }", 
+				item.getItem().getNombre(),
+				item.getItem().getCantidad(),
+				item.getPrecioFinal(),
+				item.getItem().getId(),
+				item.getItem().getDescripcion(),
+				item.getItem().getImagen(),
+				"https://www.google.com.ar",
+				"https://www.yahoo.com.ar",
+				orderId);
+		
+		MP mp = new MP ("4245217028796417", "yVBJxXMEkFsBl5VWNoztaupN8zVY9SkK");
+		JSONObject preference = mp.createPreference(payload);
+		String checkoutURL = preference.getJSONObject("response").getString("init_point");
+		return checkoutURL;
+	}
+
 	/**
 	 * Este action, se utiliza cuando se quiere ir a la pagina de "Crear un nuevo pedido"
 	 * @return ModelAndView: La pagina JSP que muestra el formulario de nuevo y el item dentro de order.
